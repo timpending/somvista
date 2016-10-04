@@ -42,24 +42,40 @@ function gotBuffers( buffers ) {
     var canvas = document.getElementById( "wavedisplay" );
 
     drawBuffer( canvas.width, canvas.height, canvas.getContext('2d'), buffers[0] );
+    console.log('88888');
+    console.log(buffers[0]);
+    console.log('88888');
+    console.log(buffers.length);
+    console.log('buffers[0 length]: ');
+    console.log(buffers[0].length);
+
 
     // the ONLY time gotBuffers is called is right after a new recording is completed -
     // so here's where we should set up the download.
-    // audioRecorder.exportWAV( doneEncoding );
     if(encoding === 'mp3') {
-        audioRecorder.exportMP3( doneEncoding );
+      audioRecorder.exportMP3( doneEncoding );
      } else {
       audioRecorder.exportWAV( doneEncoding );
     }
 }
 
 function doneEncoding( blob ) {
+  var fileName = prompt('Enter your filename')
+  if (fileName === null || 'Enter your filename'){
+    fileName = 'aSoundbyte'
+  }
+
   if(encoding === 'mp3') {
-      Recorder.setupDownload( blob, "myRecording" + ((recIndex<10)?"0":"") + recIndex + ".mp3" );
+      Recorder.setupDownload( blob,  fileName + ".mp3" );
+      Recorder.setupDownload( blob,  fileName + ".txt" );
+
     } else {
-      Recorder.setupDownload( blob, "myRecording" + ((recIndex<10)?"0":"") + recIndex + ".wav" );
+      Recorder.setupDownload( blob, fileName + ".wav" );
+      Recorder.setupDownload( blob, fileName + ".txt" );
     }
-      recIndex++;
+    recIndex++;
+    console.log('blob:');
+    console.log(blob);
 }
 
 function toggleRecording( e ) {
@@ -108,10 +124,8 @@ function updateAnalysers(time) {
         var numBars = Math.round(canvasWidth / SPACING);
         var freqByteData = new Uint8Array(analyserNode.frequencyBinCount);
 
-        console.log(freqByteData);
+
         analyserNode.getByteFrequencyData(freqByteData);
-        console.log('********');
-        console.log(analyserNode.getByteFrequencyData(freqByteData))
 
         analyserContext.clearRect(0, 0, canvasWidth, canvasHeight);
         analyserContext.fillStyle = '#F6D565';
