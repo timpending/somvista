@@ -45,9 +45,11 @@ function gotBuffers( buffers ) {
     console.log('88888');
     console.log(buffers[0]);
     console.log('88888');
-    console.log(buffers.length);
-    console.log('buffers[0 length]: ');
+    console.log(buffers[1]);
+    console.log('~~~~~~~~~~');
+    console.log('buffers lengths');
     console.log(buffers[0].length);
+    console.log(buffers[1].length);
 
 
     // the ONLY time gotBuffers is called is right after a new recording is completed -
@@ -61,17 +63,14 @@ function gotBuffers( buffers ) {
 
 function doneEncoding( blob ) {
   var fileName = prompt('Enter your filename')
-  if (fileName === null || 'Enter your filename'){
+  if (fileName === ''){
     fileName = 'aSoundbyte'
   }
 
   if(encoding === 'mp3') {
       Recorder.setupDownload( blob,  fileName + ".mp3" );
-      Recorder.setupDownload( blob,  fileName + ".txt" );
-
     } else {
       Recorder.setupDownload( blob, fileName + ".wav" );
-      Recorder.setupDownload( blob, fileName + ".txt" );
     }
     recIndex++;
     console.log('blob:');
