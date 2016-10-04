@@ -120,7 +120,7 @@ DEALINGS IN THE SOFTWARE.
     var url = (window.URL || window.webkitURL).createObjectURL(blob);
     var link = document.getElementById("save");
     link.href = url;
-    link.download = filename || 'output.wav';
+    link.download = filename || 'output.wav' || 'output.mp3';
   }
 
   window.Recorder = Recorder;
