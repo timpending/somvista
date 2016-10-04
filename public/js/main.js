@@ -108,7 +108,10 @@ function updateAnalysers(time) {
         var numBars = Math.round(canvasWidth / SPACING);
         var freqByteData = new Uint8Array(analyserNode.frequencyBinCount);
 
+        console.log(freqByteData);
         analyserNode.getByteFrequencyData(freqByteData);
+        console.log('********');
+        console.log(analyserNode.getByteFrequencyData(freqByteData))
 
         analyserContext.clearRect(0, 0, canvasWidth, canvasHeight);
         analyserContext.fillStyle = '#F6D565';
