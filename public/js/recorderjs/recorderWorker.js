@@ -2,20 +2,22 @@
 
 Copyright © 2013 Matt Diamond
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of 
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of
 the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO 
-THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 */
+
+importScripts("Mp3LameEncoder.min.js");
 
 var recLength = 0,
   recBuffersL = [],
@@ -30,6 +32,9 @@ this.onmessage = function(e){
     case 'record':
       record(e.data.buffer);
       break;
+    case 'exportMP3':
+       exportMP3(e.data.type);
+       break;
     case 'exportWAV':
       exportWAV(e.data.type);
       break;
@@ -64,6 +69,16 @@ function exportWAV(type){
 
   this.postMessage(audioBlob);
 }
+
+function exportMP3(type){
+  var bufferL = mergeBuffers(recBuffersL, recLength);
+  var bufferR = mergeBuffers(recBuffersR, recLength);
+
+  var dataview = encodeMP3(bufferL, bufferR);
+  var audioBlob = new Blob([dataview], { type: type });
+
+   this.postMessage(audioBlob);
+ }
 
 function exportMonoWAV(type){
   var bufferL = mergeBuffers(recBuffersL, recLength);
@@ -159,3 +174,15 @@ function encodeWAV(samples, mono){
 
   return view;
 }
+
+function encodeMP3(left, right){
+   var buffer = new ArrayBuffer(left.length * 2);
+   var view = new DataView(buffer);
+
+   encoder = new Mp3LameEncoder(sampleRate, 160);
+   encoder.encode([left, right]);
+
+   blob = encoder.finish("audio/mpeg");
+
+   return blob;
+ }
