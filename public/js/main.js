@@ -40,6 +40,12 @@ var encoding = 'mp3';
 //     // audioRecorder.exportMonoWAV( doneEncoding );
 // }
 
+function saveAudio() {
+    audioRecorder.exportWAV( doneEncoding );
+    // could get mono instead by saying
+    // audioRecorder.exportMonoWAV( doneEncoding );
+}
+
 function gotBuffers( buffers ) {
     var canvas = document.getElementById( "wavedisplay" );
 
@@ -112,18 +118,16 @@ function updateAnalysers(time) {
 
     // analyzer draw code here
     {
-        var SPACING = 25;
+        var SPACING = 3;
         var BAR_WIDTH = 1;
         var numBars = Math.round(canvasWidth / SPACING);
         var freqByteData = new Uint8Array(analyserNode.frequencyBinCount);
 
-
         analyserNode.getByteFrequencyData(freqByteData);
 
         analyserContext.clearRect(0, 0, canvasWidth, canvasHeight);
-        analyserContext.lineCap = 'butt';
+        analyserContext.lineCap = 'round';
         var multiplier = analyserNode.frequencyBinCount / numBars;
-        // console.log(multiplier);
 
         // Draw rectangle for each frequency bin.
         for (var i = 0; i < numBars; ++i) {
@@ -135,7 +139,7 @@ function updateAnalysers(time) {
             magnitude = magnitude / multiplier;
             var magnitude2 = freqByteData[i * multiplier];
             analyserContext.fillStyle = "hsl( " + Math.round((i*360)/numBars) + ", 100%, 50%)";
-            analyserContext.fillRect(i * SPACING, canvasHeight, BAR_WIDTH, magnitude);
+            analyserContext.fillRect(i * SPACING, canvasHeight, BAR_WIDTH, -magnitude);
         }
     }
 
