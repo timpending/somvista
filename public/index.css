@@ -1,3 +1,21 @@
 body {
   background-color: lightblue;
 }
+
+div.bar {
+    display: inline-block;
+    width: 20px;
+    height: 75px;   /* We'll override this later */
+    background-color: teal;
+    margin-right: 3px;
+}
+
+svg {
+  display: block;
+  margin-top: 15px;
+  border: 1px dotted black;
+}
+
+.circle {
+  fill: blue;
+}
