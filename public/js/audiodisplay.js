@@ -20,6 +20,7 @@ function drawBuffer( width, height, context, data ) {
             if (datum > max)
                 max = datum;
         }
+        // drawBuffer( canvas.width, canvas.height, canvas.getContext('2d'), buffers[0] );
         context.fillRect(i,(1+min)*amp,1,Math.max(1,(max-min)*amp));
     }
 }
