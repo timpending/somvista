@@ -30,6 +30,8 @@ var encoding = 'mp3';
 
 - offer mono option
 - "Monitor input" switch
+-- Upload from file support
+-- Login
 */
 
 // function saveAudio() {
@@ -110,7 +112,7 @@ function updateAnalysers(time) {
 
     // analyzer draw code here
     {
-        var SPACING = 3;
+        var SPACING = 25;
         var BAR_WIDTH = 1;
         var numBars = Math.round(canvasWidth / SPACING);
         var freqByteData = new Uint8Array(analyserNode.frequencyBinCount);
@@ -119,9 +121,9 @@ function updateAnalysers(time) {
         analyserNode.getByteFrequencyData(freqByteData);
 
         analyserContext.clearRect(0, 0, canvasWidth, canvasHeight);
-        analyserContext.fillStyle = '#F6D565';
-        analyserContext.lineCap = 'round';
+        analyserContext.lineCap = 'butt';
         var multiplier = analyserNode.frequencyBinCount / numBars;
+        // console.log(multiplier);
 
         // Draw rectangle for each frequency bin.
         for (var i = 0; i < numBars; ++i) {
@@ -133,7 +135,7 @@ function updateAnalysers(time) {
             magnitude = magnitude / multiplier;
             var magnitude2 = freqByteData[i * multiplier];
             analyserContext.fillStyle = "hsl( " + Math.round((i*360)/numBars) + ", 100%, 50%)";
-            analyserContext.fillRect(i * SPACING, canvasHeight, BAR_WIDTH, -magnitude);
+            analyserContext.fillRect(i * SPACING, canvasHeight, BAR_WIDTH, magnitude);
         }
     }
 
