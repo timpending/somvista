@@ -4,8 +4,22 @@
   	<meta name="viewport" content="width=device-width,initial-scale=1">
   	<title>See your Sounds</title>
     <link rel="stylesheet" href="index.css" media="screen" title="no title">
+    <script src="js/d3.js"></script>
   </head>
   <body>
   	<a href='record.html'> Click here to record a sound clip</a>
+    <div id='output'></div>
+    <!-- D3 Testing Zone -->
+    <script type='text/javascript'>
+
+			var dataset = [ 5, 10, 15, 20, 25 ];
+
+			d3.select("#output").selectAll("p")
+				.data(dataset)
+				.enter()
+				.append("p")
+				.text(function(d) { return d; });
+
+    </script>
   </body>
 </html>

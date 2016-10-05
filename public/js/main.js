@@ -42,14 +42,6 @@ function gotBuffers( buffers ) {
     var canvas = document.getElementById( "wavedisplay" );
 
     drawBuffer( canvas.width, canvas.height, canvas.getContext('2d'), buffers[0] );
-    console.log('88888');
-    console.log(buffers[0]);
-    console.log('88888');
-    console.log(buffers[1]);
-    console.log('~~~~~~~~~~');
-    console.log('buffers lengths');
-    console.log(buffers[0].length);
-    console.log(buffers[1].length);
 
 
     // the ONLY time gotBuffers is called is right after a new recording is completed -
