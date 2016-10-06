@@ -52,7 +52,7 @@ function d3Buffer (data) {
     .enter()
     .append("rect")
     .attr("x", function(d, i) {
-			     return i * (svgW / Math.floor(dataset.length/100) })
+			     return i * (svgW / Math.floor(dataset.length/100)) })
     .attr("y", function(d) {
           return svgH-yScale(d) })
     .attr("width", svgW / Math.floor(dataset.length/100))
