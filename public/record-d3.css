@@ -26,9 +26,9 @@ canvas {
   margin-top: 15px;
 }
 
-svg {
+/*svg {
   fill: purple;
-}
+}*/
 
 #controls {
   display: flex;
