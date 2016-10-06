@@ -18,6 +18,14 @@ canvas {
   box-shadow: 0px 0px 10px blue;
 }
 
+#output {
+  display: inline-block;
+  background: purple;
+  width: 95%;
+  height: 45%;
+  box-shadow: 0px 0px 10px black;
+}
+
 #controls {
   display: flex;
   flex-direction: row;
