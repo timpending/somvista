@@ -26,6 +26,7 @@ function drawBuffer( width, height, context, data ) {
 }
 
 function d3Buffer (data) {
+  var output = document.getElementById("output");
   // Variables
   var svgW = 1000;
   var svgH = 500;
