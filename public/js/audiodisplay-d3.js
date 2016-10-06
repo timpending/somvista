@@ -29,7 +29,7 @@ function d3Buffer (data) {
   // Variables
   var svgW = 1000;
   var svgH = 500;
-  var padding = 1;
+  var padding = 15;
 
   var dataset = data;
 
@@ -38,7 +38,7 @@ function d3Buffer (data) {
                .range([padding, svgW-padding]);
 
   var yScale = d3.scaleLinear()
-    .domain([0, d3.max(dataset, function(d) {return d } )])
+    .domain([0, d3.max(dataset, function(d) { return d;])
     .range([svgH-padding,padding]);
 
   var svg = d3.select("#output")
@@ -53,10 +53,10 @@ function d3Buffer (data) {
     .attr("x", function(d, i) {
 			     return i * (svgW / dataset.length) })
     .attr("y", function(d) {
-          return svgH-Math.abs(d*10) })
+          return svgH-yScale(Math.abs(d)) })
     .attr("width", svgW / dataset.length)
 	  .attr("height", function(d) {
-	   		  return Math.abs(d * 10);})
+	   		  return yScale(Math.abs(d);})
 	   .attr("fill", function(d) {
 			return "rgb(0, 0, " + (Math.abs(d * 11)*255) + ")";});
 
