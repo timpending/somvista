@@ -48,8 +48,7 @@ function saveAudio() {
 
 function gotBuffers( buffers ) {
     var canvas = document.getElementById( "wavedisplay" );
-    var output = document.getElementById( "output" );
-    output.empty();
+    document.getElementById("output").innerHTML = '';
     // drawBuffer( canvas.width, canvas.height, canvas.getContext('2d'), buffers[0] );
 
     d3Buffer(buffers[0]);
