@@ -58,6 +58,6 @@ function d3Buffer (data) {
 	  .attr("height", function(d) {
 	   		  return yScale(d);})
 	   .attr("fill", function(d) {
-			return "rgb(0, 0, " + (Math.abs(d * 11)*255) + ")";});
+			return "rgb(0, 0, " + (Math.abs(d * 55)*255) + ")";});
 
 }
