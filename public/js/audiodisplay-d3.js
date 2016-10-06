@@ -35,7 +35,7 @@ function d3Buffer (data) {
   var dataset = data;
 
   console.log('max: ', d3.max(dataset, function(d) {return d}));
-  console.log('min: ', d3.max(dataset, function(d) {return d}));
+  console.log('min: ', d3.min(dataset, function(d) {return d}));
 
 
 
@@ -58,9 +58,13 @@ function d3Buffer (data) {
     .append("rect")
     .attr("x", function(d, i) {
 			     return i * (svgW / Math.floor(dataset.length/1000)) })
+    // Add divisor as the bar width
+
     .attr("y", function(d) {
           return svgH-yScale(d) })
     .attr("width", svgW / Math.floor(dataset.length/1000))
+    // Add divisor as the bar width
+
 	  .attr("height", function(d) {
 	   		  return yScale(d);})
 	   .attr("fill", function(d) {
