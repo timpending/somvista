@@ -50,14 +50,14 @@ function d3Buffer (data) {
     .data(dataset)
     .enter()
     .append("rect")
-    .attr("x", function(d, i) {return  })
-    .attr("y", function(d) {return svgH-(d*100) })
+    .attr("x", function(d, i) {
+			     return i * (w / dataset.length);
+    .attr("y", function(d) {
+          return svgH-(d*100) })
     .attr("width", svgW / dataset.length - Padding)
-	   .attr("height", function(d) {
-	   		return d * 100;
-	   })
+	  .attr("height", function(d) {
+	   		  return d * 100;})
 	   .attr("fill", function(d) {
-			return "rgb(0, 0, " + ((d * 100)*255) + ")";
-	   });
+			return "rgb(0, 0, " + ((d * 100)*255) + ")";});
 
 }

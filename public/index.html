@@ -53,10 +53,10 @@
     var yAxis = d3.axisLeft()
       .scale(yScale)
 
-      var svg = d3.select("#output")
-        .append("svg")
-        .attr('width', svgW)
-        .attr('height', svgH);
+    var svg = d3.select("#output")
+      .append("svg")
+      .attr('width', svgW)
+      .attr('height', svgH);
 
     svg.append("g")
       .attr("class", "axis")
