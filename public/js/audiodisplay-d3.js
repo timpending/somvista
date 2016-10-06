@@ -54,7 +54,7 @@ function d3Buffer (data) {
 			     return i * (svgW / dataset.length) })
     .attr("y", function(d) {
           return svgH-Math.abs(d*100) })
-    .attr("width", svgW / dataset.length - padding)
+    .attr("width", svgW / dataset.length)
 	  .attr("height", function(d) {
 	   		  return Math.abs(d * 100);})
 	   .attr("fill", function(d) {
