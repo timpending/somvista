@@ -34,6 +34,11 @@ function d3Buffer (data) {
 
   var dataset = data;
 
+  console.log('max: ', d3.max(dataset, function(d) {return d}));
+  console.log('min: ', d3.max(dataset, function(d) {return d}));
+
+
+
   var xScale = d3.scaleLinear()
                .domain([0, d3.max(dataset, function(d) { return d; })])
                .range([padding, svgW-padding]);
