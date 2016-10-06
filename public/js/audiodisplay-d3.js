@@ -38,7 +38,7 @@ function d3Buffer (data) {
                .range([padding, svgW-padding]);
 
   var yScale = d3.scaleLinear()
-    .domain([0, d3.max(dataset, function(d) { return d;])
+    .domain([0, d3.max(dataset, function(d) { return d;})])
     .range([svgH-padding,padding]);
 
   var svg = d3.select("#output")
