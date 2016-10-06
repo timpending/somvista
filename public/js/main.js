@@ -49,9 +49,9 @@ function saveAudio() {
 function gotBuffers( buffers ) {
     var canvas = document.getElementById( "wavedisplay" );
     document.getElementById("output").innerHTML = '';
-    // drawBuffer( canvas.width, canvas.height, canvas.getContext('2d'), buffers[0] );
+    drawBuffer( canvas.width, canvas.height, canvas.getContext('2d'), buffers[0] );
 
-    d3Buffer(buffers[0]);
+    // d3Buffer(buffers[0]);
 
     // the ONLY time gotBuffers is called is right after a new recording is completed -
     // so here's where we should set up the download.

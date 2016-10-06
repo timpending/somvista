@@ -61,13 +61,13 @@ function d3Buffer (data) {
     // Add divisor as the bar width
 
     .attr("y", function(d) {
-          return svgH-yScale(d) })
+      return svgH-yScale(d) })
     .attr("width", svgW / Math.floor(dataset.length))
     // Add divisor as the bar width
 
 	  .attr("height", function(d) {
 	   		  return yScale(d);})
-	   .attr("fill", function(d) {
+	  .attr("fill", function(d) {
 			return "rgb(0, 0, " + (Math.abs(d * 55)*255) + ")";});
 
 }
