@@ -56,7 +56,7 @@ function d3Buffer (data) {
           return svgH-(yScale(Math.abs(d))*10000) })
     .attr("width", svgW / dataset.length)
 	  .attr("height", function(d) {
-	   		  return yScale(Math.abs(d)*10000;})
+	   		  return yScale(Math.abs(d)*10000);})
 	   .attr("fill", function(d) {
 			return "rgb(0, 0, " + (Math.abs(d * 11)*255) + ")";});
 
