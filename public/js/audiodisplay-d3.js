@@ -27,6 +27,12 @@ function drawBuffer( width, height, context, data ) {
 
 function d3Buffer (data) {
   var output = document.getElementById("output");
+  var dataFreq = analyserNode.getByteFrequencyData(freqByteData);
+  console.log('****** dataFreq *******');
+  console.log(dataFreq);
+  console.log('******');
+
+
   // Variables
   var svgW = 1024;
   var svgH = 500;
@@ -71,3 +77,28 @@ function d3Buffer (data) {
 			return "rgb(0, 0, " + (Math.abs(d * 55)*255) + ")";});
 
 }
+// {
+//     var SPACING = 3;
+//     var BAR_WIDTH = 1;
+//     var numBars = Math.round(canvasWidth / SPACING);
+//     var freqByteData = new Uint8Array(analyserNode.frequencyBinCount);
+//
+//     analyserNode.getByteFrequencyData(freqByteData);
+//
+//     analyserContext.clearRect(0, 0, canvasWidth, canvasHeight);
+//     analyserContext.lineCap = 'round';
+//     var multiplier = analyserNode.frequencyBinCount / numBars;
+//
+//     // Draw rectangle for each frequency bin.
+//     for (var i = 0; i < numBars; ++i) {
+//         var magnitude = 0;
+//         var offset = Math.floor( i * multiplier );
+//         // gotta sum/average the block, or we miss narrow-bandwidth spikes
+//         for (var j = 0; j< multiplier; j++)
+//             magnitude += freqByteData[offset + j];
+//         magnitude = magnitude / multiplier;
+//         var magnitude2 = freqByteData[i * multiplier];
+//         analyserContext.fillStyle = "hsl( " + Math.round((i*360)/numBars) + ", 100%, 50%)";
+//         analyserContext.fillRect(i * SPACING, canvasHeight, BAR_WIDTH, -magnitude);
+//     }
+// }
