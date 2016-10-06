@@ -21,11 +21,14 @@ canvas {
 
 #output {
   display: inline-block;
-  background: purple;
   width: 95%;
   height: 30%;
   margin-top: 15px;
   box-shadow: 0px 0px 10px black;
+}
+
+svg {
+  fill: purple;
 }
 
 #controls {
