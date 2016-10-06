@@ -26,10 +26,6 @@ canvas {
   margin-top: 15px;
 }
 
-/*svg {
-  fill: purple;
-}*/
-
 #controls {
   display: flex;
   flex-direction: row;

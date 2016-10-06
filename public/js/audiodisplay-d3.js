@@ -28,7 +28,7 @@ function drawBuffer( width, height, context, data ) {
 function d3Buffer (data) {
   var output = document.getElementById("output");
   // Variables
-  var svgW = 1000;
+  var svgW = 1024;
   var svgH = 500;
   var padding = 15;
 
@@ -52,10 +52,10 @@ function d3Buffer (data) {
     .enter()
     .append("rect")
     .attr("x", function(d, i) {
-			     return i * (svgW / dataset.length) })
+			     return i * (svgW / Math.floor(dataset.length/100) })
     .attr("y", function(d) {
           return svgH-yScale(d) })
-    .attr("width", svgW / dataset.length)
+    .attr("width", svgW / Math.floor(dataset.length/100))
 	  .attr("height", function(d) {
 	   		  return yScale(d);})
 	   .attr("fill", function(d) {
