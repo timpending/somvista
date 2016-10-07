@@ -77,17 +77,54 @@ function d3Buffer (data) {
 function d3Canvas(width, height, ctx, data){
   // Set axis in the middle of the canvas
   var ax = height / 2
-
+  var padding = height*0.05
+  // Rects.
   // Set an even spacing on the x-axis based on data length
-  var step = Math.ceil(width / data.length)
+  var barWidth = width / data.length
+  var divisor = 1
+  var numBars = width / (data.length / divisor)
 
-  ctx.fillStyle = "white";
-  ctx.fillRect(0,0,canvasWidth, canvasHeight)
+  ctx.clearRect(0,0,width, height);
 
-  
+  var xScale = d3.scaleLinear()
+               .domain([0, data.length])
+               .range([0, width]);
 
-  ctx.fillRect(0, 50, 100, 100)
+  var yScale = d3.scaleLinear()
+              .domain([d3.min(data, function(d) { return d;}), d3.max(data, function(d) { return d;})])
+              .range([padding, height-padding]);
 
+
+              console.log('min: ',d3.min(data, function(d) { return d;}));
+              console.log('max: ', d3.max(data, function(d) { return d;}));
+              console.log('numBars ', numBars);
+
+    var createCanvas = d3.select('#output').append('canvas')
+        .attr('id', 'canvas')
+        .attr('width', 1024)
+        .attr('height', 400)
+
+    var nodeCtx = createCanvas.node().getContext('2d');
+
+      data.forEach(function(d, i){
+        nodeCtx.beginPath()
+        nodeCtx.rect(xScale(d), yScale(d), xScale(d), yScale(d))
+        nodeCtx.fillStyle= 'purple'
+        nodeCtx.fill()
+        nodeCtx.closePath();
+      })
+
+
+  // ctx.fillStyle = "red";
+  // ctx (startX, endX, startY, endY)
+  // for(i=0; i<data.length; i++){
+  //   ctx.fillRect(i*barWidth, ax-padding*(data[i]*100), i*(2*barWidth), height-(2*padding*data[i]*100));
+  //   if (i%1000 == 0) {
+  //     console.log('LENGTH ', data.length);
+  //     console.log('x pos: ', i*barWidth);
+  //     console.log('next pos ', i*(2*barWidth));
+  //   }
+  // }
 }
 // {
 //     var SPACING = 3;
@@ -114,3 +151,38 @@ function d3Canvas(width, height, ctx, data){
 //         analyserContext.fillRect(i * SPACING, canvasHeight, BAR_WIDTH, -magnitude);
 //     }
 // }
+
+
+function d3CanvasBuff(data){
+  // ctx.clearRect(0,0,width, height);
+
+  var width = 1024;
+  var height = 500;
+  var padding = 15;
+
+  var xScale = d3.scaleLinear()
+               .domain([0, data.length])
+               .range([0, width]);
+
+  var yScale = d3.scaleLinear()
+              .domain([d3.min(data, function(d) { return d;}), d3.max(data, function(d) { return d;})])
+              .range([padding, height-padding]);
+
+    var createCanvas = d3.select('#output').append('canvas')
+        .attr('id', 'canvas')
+        .attr('width', width)
+        .attr('height', height)
+
+    var nodeCtx = createCanvas.node().getContext('2d');
+
+      data.forEach(function(d, i){
+        nodeCtx.beginPath()
+        nodeCtx.rect(xScale(d.length), yScale(d), xScale(d.length), yScale(d))
+        nodeCtx.fillStyle= 'white'
+        nodeCtx.fill()
+        nodeCtx.closePath();
+        if (i%5000 == 0) {
+          console.log(i);
+        }
+      })
+}
