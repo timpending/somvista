@@ -177,7 +177,8 @@ function d3CanvasBuff(data){
 
       data.forEach(function(d, i){
         nodeCtx.beginPath()
-        nodeCtx.rect(xScale(d.length), yScale(d), xScale(d.length), yScale(d))
+        nodeCtx.rect(width*(i/width), padding, width*(i/width), 50)
+        // nodeCtx.rect(xScale(d.length), yScale(d), xScale(d.length), yScale(d))
         nodeCtx.fillStyle= 'white'
         nodeCtx.fill()
         nodeCtx.closePath();
