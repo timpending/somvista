@@ -6,6 +6,7 @@ function drawBuffer( width, height, context, data ) {
     var step = Math.ceil( data.length / width );
     var amp = height / 2;
     context.fillStyle = "silver";
+    // clearReact Erases what is show in display
     context.clearRect(0,0,width,height);
     console.log(step);
     for(var i=0; i < width; i++){
@@ -27,11 +28,6 @@ function drawBuffer( width, height, context, data ) {
 
 function d3Buffer (data) {
   var output = document.getElementById("output");
-  var dataFreq = analyserNode.getByteFrequencyData(freqByteData);
-  console.log('****** dataFreq *******');
-  console.log(dataFreq);
-  console.log('******');
-
 
   // Variables
   var svgW = 1024;
@@ -75,6 +71,22 @@ function d3Buffer (data) {
 	   		  return yScale(d);})
 	  .attr("fill", function(d) {
 			return "rgb(0, 0, " + (Math.abs(d * 55)*255) + ")";});
+
+}
+
+function d3Canvas(width, height, ctx, data){
+  // Set axis in the middle of the canvas
+  var ax = height / 2
+
+  // Set an even spacing on the x-axis based on data length
+  var step = Math.ceil(width / data.length)
+
+  ctx.fillStyle = "white";
+  ctx.fillRect(0,0,canvasWidth, canvasHeight)
+
+  
+
+  ctx.fillRect(0, 50, 100, 100)
 
 }
 // {
