@@ -52,9 +52,15 @@ function gotBuffers( buffers ) {
 
     // drawBuffer( canvas.width, canvas.height, canvas.getContext('2d'), buffers[0] );
 
-    // d3Buffer(buffers[0]);
+
     // d3Canvas(canvas.width, canvas.height, canvas.getContext('2d'), buffers[0]);
-    d3CanvasBuff(buffers[0]);
+    if (buffers[0].length <=100000) {
+      console.log('data length ', buffers[0].length);
+      d3Buffer(buffers[0]);
+    } else {
+      console.log(buffers[0].length);
+      d3CanvasBuff('data length ', buffers[0]);
+    }
 
     // the ONLY time gotBuffers is called is right after a new recording is completed -
     // so here's where we should set up the download.

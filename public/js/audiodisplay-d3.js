@@ -39,7 +39,9 @@ function d3Buffer (data) {
   console.log('max: ', d3.max(dataset, function(d) {return d}));
   console.log('min: ', d3.min(dataset, function(d) {return d}));
 
-
+  // var yScale = d3.scaleLinear()
+  //             .domain([d3.min(data, function(d) { return d;}), d3.max(data, function(d) { return d;})])
+  //             .range([padding, (height/2)]);
 
   var xScale = d3.scaleLinear()
                .domain([0, d3.max(dataset, function(d) { return d; })])
@@ -47,7 +49,11 @@ function d3Buffer (data) {
 
   var yScale = d3.scaleLinear()
     .domain([d3.min(dataset, function(d) { return d;}), d3.max(dataset, function(d) { return d;})])
-    .range([svgH-padding,padding]);
+    .range([padding, svgH-2*padding]);
+    // 15 - 470
+  var colorScale = d3.scaleLinear()
+                  .domain([d3.min(dataset, function(d) { return d;}), d3.max(dataset, function(d) { return d;})])
+                  .range([0,260]);
 
   var svg = d3.select("#output")
     .append("svg")
@@ -63,15 +69,19 @@ function d3Buffer (data) {
     // Add divisor as the bar width
 
     .attr("y", function(d) {
-      return svgH-yScale(d) })
+      return yScale(d) })
     .attr("width", svgW / Math.floor(dataset.length))
     // Add divisor as the bar width
 
-	  .attr("height", function(d) {
-	   		  return yScale(d);})
+	  .attr("height", function(d, i) {
+        if (i%5000 == 0){
+            console.log('y: ', yScale(d));
+            console.log('height: ', 2*Math.abs(svgH/2-yScale(d)));
+          }
+	   		  return  2*Math.abs(svgH/2-yScale(d))})
 	  .attr("fill", function(d) {
-			return "rgb(0, 0, " + (Math.abs(d * 55)*255) + ")";});
-
+			return 'hsl('+Math.floor(colorScale(d)/2)+', 100%, 50%)'});
+// nodeCtx.rect(width*(i/width), yScale(d), i/width, (height - 2*yScale(d)));
 }
 
 function d3Canvas(width, height, ctx, data){
@@ -183,10 +193,11 @@ function d3CanvasBuff(data){
       data.forEach(function(d, i){
         nodeCtx.beginPath()
         // Start TopL X, TopL Y, Width, Height,
+        nodeCtx.fillStyle= 'green'
         nodeCtx.rect(width*(i/width), yScale(d), i/width, (height - 2*yScale(d)));
         // 15, height to be 470
         // nodeCtx.rect(xScale(d.length), yScale(d), xScale(d.length), yScale(d))
-        nodeCtx.fillStyle= 'green'
+
         // function(d) {return `rgba(${colorScale(d)},${colorScale(d)},${colorScale(d)})`}
         nodeCtx.fill()
         nodeCtx.closePath();
