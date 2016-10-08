@@ -166,7 +166,12 @@ function d3CanvasBuff(data){
 
   var yScale = d3.scaleLinear()
               .domain([d3.min(data, function(d) { return d;}), d3.max(data, function(d) { return d;})])
-              .range([padding, height-padding]);
+              .range([padding, (height/2)]);
+              // height between 15,250
+
+  var colorScale = d3.scaleLinear()
+                  .domain([d3.min(data, function(d) { return d;}), d3.max(data, function(d) { return d;})])
+                  .range([0, 255]);
 
     var createCanvas = d3.select('#output').append('canvas')
         .attr('id', 'canvas')
@@ -177,13 +182,21 @@ function d3CanvasBuff(data){
 
       data.forEach(function(d, i){
         nodeCtx.beginPath()
-        nodeCtx.rect(width*(i/width), padding, width*(i/width), 50)
+        // Start TopL X, TopL Y, Width, Height,
+        nodeCtx.rect(width*(i/width), yScale(d), i/width, (height - 2*yScale(d)));
+        // 15, height to be 470
         // nodeCtx.rect(xScale(d.length), yScale(d), xScale(d.length), yScale(d))
-        nodeCtx.fillStyle= 'white'
+        nodeCtx.fillStyle= 'green'
+        // function(d) {return `rgba(${colorScale(d)},${colorScale(d)},${colorScale(d)})`}
         nodeCtx.fill()
         nodeCtx.closePath();
         if (i%5000 == 0) {
           console.log(i);
+          console.log('data: ', d);
+          console.log('height: ', yScale(d));
+          console.log('width: ', xScale(i));
+          console.log('i/width', i/width);
+          console.log('colorValue', colorScale(d));
         }
       })
 }
