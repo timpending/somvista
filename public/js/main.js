@@ -25,6 +25,8 @@ var analyserContext = null;
 var canvasWidth, canvasHeight;
 var recIndex = 0;
 var encoding = 'mp3';
+var theRecording = null;
+var grabCanvas = document.getElementById('canvas')
 
 /* TODO:
 
@@ -54,12 +56,14 @@ function gotBuffers( buffers ) {
 
 
     // d3Canvas(canvas.width, canvas.height, canvas.getContext('2d'), buffers[0]);
+    theRecording = buffers[0];
+
     if (buffers[0].length <=100000) {
       console.log('data length ', buffers[0].length);
       d3Buffer(buffers[0]);
     } else {
-      console.log(buffers[0].length);
-      d3CanvasBuff('data length ', buffers[0]);
+      console.log('data length ', buffers[0].length);
+      d3CanvasBuff(buffers[0]);
     }
 
     // the ONLY time gotBuffers is called is right after a new recording is completed -

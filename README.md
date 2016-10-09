@@ -1,15 +1,31 @@
 # Capstone Submission - TIM PENDER
 Submit your capstone ideas here for approval. Fork, clone, and send a pull request with these details about your app:
 
-#TODO
-- wireframes
-- stories
-- Documentation links:
+
+# Documentation links:
   - MDN Web Audio API: https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API
   - W3C Web Audio API: https://www.w3.org/TR/webaudio/
   - D3 Homepage: https://d3js.org/
-  - D3 API Reference: https://github.com/d3/d3/blob/master/API.md
+  - D3 API Reference: https://github.com/d3/d3/blob/master/API.
+  - MDN Canvas API: https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API
+ - W3C Canvas Specs: https://www.w3.org/TR/2dcontext/
 
+#TODO
+- Wireframes
+- User Stories
+- Logo Design
+- Home UI
+- Server Design / Auth
+- DB Design
+- React?
+- UI Color Options
+  -- Base Color Modified by %'s
+  -- Gradient?
+  -- Mulitple color support based on wavelengths (abs val of freq.)
+- UI Bar Options
+  -- Scale the widths down based on user input.  Default = max length
+  -- Scale exponentially based on the data length
+- Export Canvas / div option
 
 # Technologies Being Used:
 - MediaRecorder API
@@ -43,17 +59,25 @@ The recording upload and the visualization of what was recorded.  UI to control 
 # Project Constraints
 You must successfully complete a capstone project that adheres to the following guidelines. Your project must:
 
-* Be sufficiently unique in the cohort
-* Have client-side functionality
-* Client-side code may use jQuery, React, Angular etc...
+* √ Be sufficiently unique in the cohort
+* √ Have client-side functionality
+* √ Client-side code may use jQuery, React, Angular etc...
+*  ^^ May need to do React, more JS for interactivity.
 * Client-side code may be part of Express, or a separate repo
+
 * Have server-side functionality
+
 * Server-side code may be in Rails, Node/Express, PHP, Python, Go etc..
+
 * Server-side code must include some kind of persistence - PostgreSQL, Mongo, Redis etc...
+
 * Look decent - either using custom CSS or uniquely modified Bootstrap / Semantic
+
 * Be deployed and ready to demo by the provided deadline
-* Have some sort of API integration (email, maps, stocks, text messages, physical devices etc...)
-* The ideal project has functionality visible to non-logged-in users (easier for employers to see).
+
+* √ Have some sort of API integration (email, maps, stocks, text messages, physical devices etc...)
+
+* √ The ideal project has functionality visible to non-logged-in users (easier for employers to see).
 
 The more creative the better! Anything from card/board games to highly-specific financial apps or apps you wished you had in previous jobs or other situations are all good candidates.
 

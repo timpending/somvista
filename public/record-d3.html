@@ -4,7 +4,9 @@
   	<meta name="viewport" content="width=device-width,initial-scale=1">
   	<title>Audio Recorder</title>
     <link rel="stylesheet" href="record-d3.css" media="screen" title="no title">
+
     <script src="js/d3.js"></script> <!-- Swap to min on deployment -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script> -->
     <script src="js/audiodisplay-d3.js"></script>
   	<script src="js/recorderjs/recorder.js"></script>
   	<script src="js/main.js"></script>
@@ -18,6 +20,7 @@
 		  </select>
   		<img id="record" src="img/mic128.png" onclick="toggleRecording(this);">
   		<a id="save" href="#"><img src="img/save.svg"></a>
+      <button id="downloadPDF" onclick="downloadPDF()">PDF</button>
   	</div>
     <div id="viz">
   		<!-- <canvas id="analyser" width="1024" height="500"></canvas> -->

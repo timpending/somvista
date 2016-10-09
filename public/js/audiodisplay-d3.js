@@ -53,7 +53,7 @@ function d3Buffer (data) {
     // 15 - 485
   var colorScale = d3.scaleLinear()
                   .domain([d3.min(dataset, function(d) { return d;}), d3.max(dataset, function(d) { return d;})])
-                  .range([0,260]);
+                  .range([0,360]);
 
   var svg = d3.select("#output")
     .append("svg")
@@ -79,15 +79,10 @@ function d3Buffer (data) {
     // Add divisor as the bar width
 
 	  .attr("height", function(d, i) {
-        if (i%5000 == 0){
-          console.log('yScale: ', yScale(d));
-            console.log('y: ', svgH/2-Math.abs(svgH/2-yScale(d)));
-            console.log('height: ', 2*Math.abs(svgH/2-yScale(d)));
-          }
           return 2*Math.abs(svgH/2-yScale(d))
         })
 	  .attr("fill", function(d) {
-			return 'hsl('+Math.floor(colorScale(d)/2)+', 100%, 50%)'});
+			return 'hsl('+Math.floor(colorScale(d))+', 100%, 50%)'});
 // nodeCtx.rect(width*(i/width), yScale(d), i/width, (height - 2*yScale(d)));
 }
 
@@ -119,7 +114,7 @@ function d3Canvas(width, height, ctx, data){
     var createCanvas = d3.select('#output').append('canvas')
         .attr('id', 'canvas')
         .attr('width', 1024)
-        .attr('height', 400)
+        .attr('height', 500)
 
     var nodeCtx = createCanvas.node().getContext('2d');
 
@@ -130,7 +125,20 @@ function d3Canvas(width, height, ctx, data){
         nodeCtx.fill()
         nodeCtx.closePath();
       })
+}
 
+// Start of saving to pdf function.  Png might work better
+function downloadPDF() {
+  // var imgData = grabCanvas.toDataURL("image/jpeg", 1.0);
+  var pdf = new jsPDF();
+
+  pdf.addImage(pdfDataURL, 'JPEG', 0, 0);
+  var download = document.getElementById('downloadPDF');
+
+  pdf.save("download.pdf");
+  }
+//   , false);
+// }
 
   // ctx.fillStyle = "red";
   // ctx (startX, endX, startY, endY)
@@ -142,7 +150,8 @@ function d3Canvas(width, height, ctx, data){
   //     console.log('next pos ', i*(2*barWidth));
   //   }
   // }
-}
+  //
+  //
 // {
 //     var SPACING = 3;
 //     var BAR_WIDTH = 1;
@@ -176,6 +185,7 @@ function d3CanvasBuff(data){
   var width = 1024;
   var height = 500;
   var padding = 15;
+  var grabCanvas = document.getElementById('canvas');
 
   var xScale = d3.scaleLinear()
                .domain([0, data.length])
@@ -196,7 +206,7 @@ function d3CanvasBuff(data){
         .attr('height', height)
 
     var nodeCtx = createCanvas.node().getContext('2d');
-
+    console.log(data);
       data.forEach(function(d, i){
         nodeCtx.beginPath()
         // Start TopL X, TopL Y, Width, Height,
@@ -217,4 +227,6 @@ function d3CanvasBuff(data){
           console.log('colorValue', colorScale(d));
         }
       })
-}
+      // May add PDF functionality later
+      // pdfDataURL = grabCanvas.toDataURL("image/jpeg", 1);
+  }
