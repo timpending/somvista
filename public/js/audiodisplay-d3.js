@@ -213,13 +213,17 @@ function d3CanvasBuff(data){
         function yScaleValue(d) {
           var temp = yScale(d)
           if (temp > 250) {
-            return height-Math.abs(height/2-yScale(d))
+            return height/2-Math.abs(height/2-yScale(d))
+            //500 - (50)
           } else {
             return temp
           }
         }
+        function heightScaleValue(d){
+          return 2*Math.abs(height/2 - yScale(d))
+        }
         nodeCtx.rect(xScale(i), yScaleValue(d),
-           rectWidth, 2*Math.abs(height/2 - yScale(d)));
+           rectWidth, heightScaleValue(d));
         // 15, height to be 470
         // nodeCtx.rect(xScale(d.length), yScale(d), xScale(d.length), yScale(d))
 
