@@ -34,21 +34,19 @@ function d3Buffer (data) {
   var svgH = 500;
   var padding = 15;
 
-  var dataset = data;
-
-  console.log('max: ', d3.max(dataset, function(d) {return d}));
-  console.log('min: ', d3.min(dataset, function(d) {return d}));
+  console.log('max: ', d3.max(data, function(d) {return d}));
+  console.log('min: ', d3.min(data, function(d) {return d}));
 
   // var yScale = d3.scaleLinear()
   //             .domain([d3.min(data, function(d) { return d;}), d3.max(data, function(d) { return d;})])
   //             .range([padding, (height/2)]);
 
   var yScale = d3.scaleLinear()
-    .domain([d3.min(dataset, function(d) { return d;}), d3.max(dataset, function(d) { return d;})])
+    .domain([d3.min(data, function(d) { return d;}), d3.max(data, function(d) { return d;})])
     .range([padding, svgH-padding]);
     // 15 - 485
   var colorScale = d3.scaleLinear()
-                  .domain([d3.min(dataset, function(d) { return d;}), d3.max(dataset, function(d) { return d;})])
+                  .domain([d3.min(data, function(d) { return d;}), d3.max(data, function(d) { return d;})])
                   .range([0,360]);
 
   var svg = d3.select("#output")
@@ -57,11 +55,11 @@ function d3Buffer (data) {
     .attr('height', svgH);
 
   svg.selectAll("rect")
-    .data(dataset)
+    .data(data)
     .enter()
     .append("rect")
     .attr("x", function(d, i) {
-			     return i * (svgW / dataset.length) })
+			     return i * (svgW / data.length) })
     // Add divisor as the bar width
 
     .attr("y", function(d) {
@@ -71,7 +69,7 @@ function d3Buffer (data) {
           return yScale(d)
       }
     })
-    .attr("width", svgW / dataset.length)
+    .attr("width", svgW / data.length)
     // Add divisor as the bar width
 
 	  .attr("height", function(d, i) {
@@ -194,7 +192,7 @@ function d3CanvasBuff(data){
 
   var colorScale = d3.scaleLinear()
                   .domain([d3.min(data, function(d) { return d;}), d3.max(data, function(d) { return d;})])
-                  .range([0, 255]);
+                  .range([0,360]);
 
     var createCanvas = d3.select('#output').append('canvas')
         .attr('id', 'canvas')
@@ -207,9 +205,7 @@ function d3CanvasBuff(data){
 
       data.forEach(function(d, i){
         var rectWidth = i/data.length
-        nodeCtx.beginPath()
-        // Start TopL X, TopL Y, Width, Height,
-        nodeCtx.fillStyle= 'green';
+
         function yScaleValue(d) {
           var temp = yScale(d)
           if (temp > 250) {
@@ -219,9 +215,14 @@ function d3CanvasBuff(data){
             return temp
           }
         }
+
         function heightScaleValue(d){
           return 2*Math.abs(height/2 - yScale(d))
         }
+
+        nodeCtx.beginPath()
+        // Start TopL X, TopL Y, Width, Height,
+        nodeCtx.fillStyle= 'hsl('+colorScale(d)+", 100%, 50%)"
         nodeCtx.rect(xScale(i), yScaleValue(d),
            rectWidth, heightScaleValue(d));
         // 15, height to be 470
