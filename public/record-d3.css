@@ -21,6 +21,7 @@ canvas {
 #output {
   display: inline-block;
   margin-top: 15px;
+  background-color: black;
 }
 
 #controls {

@@ -49,8 +49,8 @@ function d3Buffer (data) {
 
   var yScale = d3.scaleLinear()
     .domain([d3.min(dataset, function(d) { return d;}), d3.max(dataset, function(d) { return d;})])
-    .range([padding, svgH-2*padding]);
-    // 15 - 470
+    .range([padding, svgH-padding]);
+    // 15 - 485
   var colorScale = d3.scaleLinear()
                   .domain([d3.min(dataset, function(d) { return d;}), d3.max(dataset, function(d) { return d;})])
                   .range([0,260]);
@@ -69,16 +69,23 @@ function d3Buffer (data) {
     // Add divisor as the bar width
 
     .attr("y", function(d) {
-      return yScale(d) })
+      if (yScale(d) > svgH/2){
+        return svgH/2-Math.abs(svgH/2-yScale(d))
+      } else {
+          return yScale(d)
+      }
+    })
     .attr("width", svgW / Math.floor(dataset.length))
     // Add divisor as the bar width
 
 	  .attr("height", function(d, i) {
         if (i%5000 == 0){
-            console.log('y: ', yScale(d));
+          console.log('yScale: ', yScale(d));
+            console.log('y: ', svgH/2-Math.abs(svgH/2-yScale(d)));
             console.log('height: ', 2*Math.abs(svgH/2-yScale(d)));
           }
-	   		  return  2*Math.abs(svgH/2-yScale(d))})
+          return 2*Math.abs(svgH/2-yScale(d))
+        })
 	  .attr("fill", function(d) {
 			return 'hsl('+Math.floor(colorScale(d)/2)+', 100%, 50%)'});
 // nodeCtx.rect(width*(i/width), yScale(d), i/width, (height - 2*yScale(d)));
