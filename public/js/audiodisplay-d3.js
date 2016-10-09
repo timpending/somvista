@@ -43,10 +43,6 @@ function d3Buffer (data) {
   //             .domain([d3.min(data, function(d) { return d;}), d3.max(data, function(d) { return d;})])
   //             .range([padding, (height/2)]);
 
-  var xScale = d3.scaleLinear()
-               .domain([0, d3.max(dataset, function(d) { return d; })])
-               .range([padding, svgW-padding]);
-
   var yScale = d3.scaleLinear()
     .domain([d3.min(dataset, function(d) { return d;}), d3.max(dataset, function(d) { return d;})])
     .range([padding, svgH-padding]);
@@ -65,7 +61,7 @@ function d3Buffer (data) {
     .enter()
     .append("rect")
     .attr("x", function(d, i) {
-			     return i * (svgW / Math.floor(dataset.length)) })
+			     return i * (svgW / dataset.length) })
     // Add divisor as the bar width
 
     .attr("y", function(d) {
@@ -75,7 +71,7 @@ function d3Buffer (data) {
           return yScale(d)
       }
     })
-    .attr("width", svgW / Math.floor(dataset.length))
+    .attr("width", svgW / dataset.length)
     // Add divisor as the bar width
 
 	  .attr("height", function(d, i) {
@@ -89,7 +85,7 @@ function d3Buffer (data) {
 function d3Canvas(width, height, ctx, data){
   // Set axis in the middle of the canvas
   var ax = height / 2
-  var padding = height*0.05
+  var padding = 15
   // Rects.
   // Set an even spacing on the x-axis based on data length
   var barWidth = width / data.length
@@ -193,8 +189,8 @@ function d3CanvasBuff(data){
 
   var yScale = d3.scaleLinear()
               .domain([d3.min(data, function(d) { return d;}), d3.max(data, function(d) { return d;})])
-              .range([padding, (height/2)]);
-              // height between 15,250
+              .range([padding, height-padding]);
+              // height between 15,285
 
   var colorScale = d3.scaleLinear()
                   .domain([d3.min(data, function(d) { return d;}), d3.max(data, function(d) { return d;})])
@@ -207,11 +203,23 @@ function d3CanvasBuff(data){
 
     var nodeCtx = createCanvas.node().getContext('2d');
     console.log(data);
+
+
       data.forEach(function(d, i){
+        var rectWidth = i/data.length
         nodeCtx.beginPath()
         // Start TopL X, TopL Y, Width, Height,
-        nodeCtx.fillStyle= 'green'
-        nodeCtx.rect(width*(i/width), yScale(d), i/width, (height - 2*yScale(d)));
+        nodeCtx.fillStyle= 'green';
+        function yScaleValue(d) {
+          var temp = yScale(d)
+          if (temp > 250) {
+            return height-Math.abs(height/2-yScale(d))
+          } else {
+            return temp
+          }
+        }
+        nodeCtx.rect(xScale(i), yScaleValue(d),
+           rectWidth, 2*Math.abs(height/2 - yScale(d)));
         // 15, height to be 470
         // nodeCtx.rect(xScale(d.length), yScale(d), xScale(d.length), yScale(d))
 
@@ -223,8 +231,7 @@ function d3CanvasBuff(data){
           console.log('data: ', d);
           console.log('height: ', yScale(d));
           console.log('width: ', xScale(i));
-          console.log('i/width', i/width);
-          console.log('colorValue', colorScale(d));
+          console.log('height ', 2*Math.abs(height/2 - yScale(d)));
         }
       })
       // May add PDF functionality later
