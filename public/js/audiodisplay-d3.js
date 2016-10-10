@@ -28,7 +28,8 @@ function drawBuffer( width, height, context, data ) {
 
 function d3Buffer (data) {
   var output = document.getElementById("output");
-
+  output.innerHTML= '';
+  output.style.background = canvasBackgroundColor
   // Variables
   var svgW = 1024;
   var svgH = 500;
@@ -80,17 +81,14 @@ function d3Buffer (data) {
 // nodeCtx.rect(width*(i/width), yScale(d), i/width, (height - 2*yScale(d)));
 }
 
-function d3Canvas(width, height, ctx, data){
-  // Set axis in the middle of the canvas
-  var ax = height / 2
-  var padding = 15
-  // Rects.
-  // Set an even spacing on the x-axis based on data length
-  var barWidth = width / data.length
-  var divisor = 1
-  var numBars = width / (data.length / divisor)
 
-  ctx.clearRect(0,0,width, height);
+function d3CanvasBuff(data){
+  var width = 1024;
+  var height = 500;
+  var padding = 15;
+
+  var output = document.getElementById("output");
+  output.innerHTML = '';
 
   var xScale = d3.scaleLinear()
                .domain([0, data.length])
@@ -99,27 +97,103 @@ function d3Canvas(width, height, ctx, data){
   var yScale = d3.scaleLinear()
               .domain([d3.min(data, function(d) { return d;}), d3.max(data, function(d) { return d;})])
               .range([padding, height-padding]);
+              // height between 15,285
 
-
-              console.log('min: ',d3.min(data, function(d) { return d;}));
-              console.log('max: ', d3.max(data, function(d) { return d;}));
-              console.log('numBars ', numBars);
+  var colorScale = d3.scaleLinear()
+                  .domain([d3.min(data, function(d) { return d;}), d3.max(data, function(d) { return d;})])
+                  .range([0,360]);
 
     var createCanvas = d3.select('#output').append('canvas')
         .attr('id', 'canvas')
-        .attr('width', 1024)
-        .attr('height', 500)
+        .attr('width', width)
+        .attr('height', height)
+        .attr('style', 'background-color: '+canvasBackgroundColor + ';')
 
     var nodeCtx = createCanvas.node().getContext('2d');
+    console.log(data);
+
 
       data.forEach(function(d, i){
+        var rectWidth = i/data.length
+
+        function yScaleValue(d) {
+          var temp = yScale(d)
+          if (temp > 250) {
+            return height/2-Math.abs(height/2-yScale(d))
+            //500 - (50)
+          } else {
+            return temp
+          }
+        }
+
+        function heightScaleValue(d){
+          return 2*Math.abs(height/2 - yScale(d))
+        }
+
         nodeCtx.beginPath()
-        nodeCtx.rect(xScale(d), yScale(d), xScale(d), yScale(d))
-        nodeCtx.fillStyle= 'purple'
+        // Start TopL X, TopL Y, Width, Height,
+        nodeCtx.fillStyle= 'hsl('+colorScale(d)+", 100%, 50%)"
+        nodeCtx.rect(xScale(i), yScaleValue(d),
+           rectWidth, heightScaleValue(d));
+        // 15, height to be 470
+        // nodeCtx.rect(xScale(d.length), yScale(d), xScale(d.length), yScale(d))
+
+        // function(d) {return `rgba(${colorScale(d)},${colorScale(d)},${colorScale(d)})`}
         nodeCtx.fill()
         nodeCtx.closePath();
+        if (i%5000 == 0) {
+          console.log(i);
+          console.log('data: ', d);
+          console.log('height: ', yScale(d));
+          console.log('width: ', xScale(i));
+          console.log('height ', 2*Math.abs(height/2 - yScale(d)));
+        }
       })
-}
+      // May add PDF functionality later
+      // pdfDataURL = grabCanvas.toDataURL("image/jpeg", 1);
+  }
+
+// function d3Canvas(width, height, ctx, data){
+//
+//   // Set axis in the middle of the canvas
+//   var ax = height / 2
+//   var padding = 15
+//   // Rects.
+//   // Set an even spacing on the x-axis based on data length
+//   var barWidth = width / data.length
+//   var divisor = 1
+//   var numBars = width / (data.length / divisor)
+//
+//   ctx.clearRect(0,0,width, height);
+//
+//   var xScale = d3.scaleLinear()
+//                .domain([0, data.length])
+//                .range([0, width]);
+//
+//   var yScale = d3.scaleLinear()
+//               .domain([d3.min(data, function(d) { return d;}), d3.max(data, function(d) { return d;})])
+//               .range([padding, height-padding]);
+//
+//
+//               console.log('min: ',d3.min(data, function(d) { return d;}));
+//               console.log('max: ', d3.max(data, function(d) { return d;}));
+//               console.log('numBars ', numBars);
+//
+//     var createCanvas = d3.select('#output').append('canvas')
+//         .attr('id', 'canvas')
+//         .attr('width', 1024)
+//         .attr('height', 500)
+//
+//     var nodeCtx = createCanvas.node().getContext('2d');
+//
+//       data.forEach(function(d, i){
+//         nodeCtx.beginPath()
+//         nodeCtx.rect(xScale(d), yScale(d), xScale(d), yScale(d))
+//         nodeCtx.fillStyle= 'purple'
+//         nodeCtx.fill()
+//         nodeCtx.closePath();
+//       })
+// }
 
 // Start of saving to pdf function.  Png might work better
 function downloadPDF() {
@@ -171,74 +245,3 @@ function downloadPDF() {
 //         analyserContext.fillRect(i * SPACING, canvasHeight, BAR_WIDTH, -magnitude);
 //     }
 // }
-
-
-function d3CanvasBuff(data){
-  // ctx.clearRect(0,0,width, height);
-
-  var width = 1024;
-  var height = 500;
-  var padding = 15;
-  var grabCanvas = document.getElementById('canvas');
-
-  var xScale = d3.scaleLinear()
-               .domain([0, data.length])
-               .range([0, width]);
-
-  var yScale = d3.scaleLinear()
-              .domain([d3.min(data, function(d) { return d;}), d3.max(data, function(d) { return d;})])
-              .range([padding, height-padding]);
-              // height between 15,285
-
-  var colorScale = d3.scaleLinear()
-                  .domain([d3.min(data, function(d) { return d;}), d3.max(data, function(d) { return d;})])
-                  .range([0,360]);
-
-    var createCanvas = d3.select('#output').append('canvas')
-        .attr('id', 'canvas')
-        .attr('width', width)
-        .attr('height', height)
-
-    var nodeCtx = createCanvas.node().getContext('2d');
-    console.log(data);
-
-
-      data.forEach(function(d, i){
-        var rectWidth = i/data.length
-
-        function yScaleValue(d) {
-          var temp = yScale(d)
-          if (temp > 250) {
-            return height/2-Math.abs(height/2-yScale(d))
-            //500 - (50)
-          } else {
-            return temp
-          }
-        }
-
-        function heightScaleValue(d){
-          return 2*Math.abs(height/2 - yScale(d))
-        }
-
-        nodeCtx.beginPath()
-        // Start TopL X, TopL Y, Width, Height,
-        nodeCtx.fillStyle= 'hsl('+colorScale(d)+", 100%, 50%)"
-        nodeCtx.rect(xScale(i), yScaleValue(d),
-           rectWidth, heightScaleValue(d));
-        // 15, height to be 470
-        // nodeCtx.rect(xScale(d.length), yScale(d), xScale(d.length), yScale(d))
-
-        // function(d) {return `rgba(${colorScale(d)},${colorScale(d)},${colorScale(d)})`}
-        nodeCtx.fill()
-        nodeCtx.closePath();
-        if (i%5000 == 0) {
-          console.log(i);
-          console.log('data: ', d);
-          console.log('height: ', yScale(d));
-          console.log('width: ', xScale(i));
-          console.log('height ', 2*Math.abs(height/2 - yScale(d)));
-        }
-      })
-      // May add PDF functionality later
-      // pdfDataURL = grabCanvas.toDataURL("image/jpeg", 1);
-  }

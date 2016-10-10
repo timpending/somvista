@@ -5,7 +5,8 @@
   	<title>Audio Recorder</title>
     <link rel="stylesheet" href="record-d3.css" media="screen" title="no title">
 
-    <script src="js/d3.js"></script> <!-- Swap to min on deployment -->
+    <script src="js/d3.js"></script> <!-- TODO: Swap to min on deployment -->
+    <script src="js/jscolor.min.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script> -->
     <script src="js/audiodisplay-d3.js"></script>
   	<script src="js/recorderjs/recorder.js"></script>
@@ -21,11 +22,18 @@
   		<img id="record" src="img/mic128.png" onclick="toggleRecording(this);">
   		<a id="save" href="#"><img src="img/save.svg"></a>
       <button id="downloadPDF" onclick="downloadPDF()">PDF</button>
+
+      <form onsubmit="event.preventDefault(); updateBGColor();">
+        <input name="color2" type="hidden" id="canvasColorSelector">
+        <button type='submit' class="jscolor {valueElement: 'canvasColorSelector'}" id='canvasColorSelector'>Change the Background Color</button>
+        <input type='submit' />
+      </form>
   	</div>
     <div id="viz">
   		<canvas id="analyser" width="1024" height="500"></canvas>
       <!-- <canvas id="output" width='1024' height='500'></canvas> -->
       <div id="output"></div>
   	</div>
+
   </body>
 </html>
