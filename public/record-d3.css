@@ -1,4 +1,4 @@
-html { overflow: hidden; }
+/*html { overflow: hidden; }*/
 
 body {
   font: 14pt Arial, sans-serif;
@@ -19,6 +19,7 @@ canvas {
 #output {
   display: inline-block;
   margin-top: 15px;
+  box-shadow: 0px 0px 10px blue;
 }
 
 #controls {
