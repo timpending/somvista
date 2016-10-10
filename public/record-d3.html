@@ -22,19 +22,21 @@
     <!-- Login Dialog -->
     <dialog id="loginDialog" class="mdl-dialog">
       <h4 class="mdl-dialog__title">Sign In</h4>
+      <p id="loginError" class="mdl-color-text--red"></p>
       <div class="mdl-dialog__content">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input class="mdl-textfield__input" type="text" id="sample3">
-          <label class="mdl-textfield__label" for="sample3">Email</label>
+          <input class="mdl-textfield__input" type="text" id="loginEmail">
+          <label class="mdl-textfield__label" for="loginEmail">Email</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input class="mdl-textfield__input" type="text" id="sample3">
-          <label class="mdl-textfield__label" for="sample3">Password</label>
+          <input class="mdl-textfield__input" type="text" id="loginPassword">
+          <label class="mdl-textfield__label" for="loginPassword">Password</label>
         </div>
       </div>
 
       <div class="mdl-dialog__actions">
-        <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Sign In</button>
+        <button id="loginButton" type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Sign In</button>
+        <div id="loginLoader" class="login-loader mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
       </div>
     </dialog>
   <!-- End Login Dialog -->
@@ -42,7 +44,7 @@
 
     <!-- Auth Overlay for Login -->
     <div class='login-cover'>
-      <div id="p2" class="page-loader mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+      <div id="pageLoader" class="page-loader mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
     </div>
 
 <!-- MAIN -->
