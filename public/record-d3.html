@@ -9,9 +9,13 @@
   <body>
     <div id="testArea">
       <textarea id='mainText' placeholder='text here ... '></textarea>
+      <textarea id='human' placeholder='name here ... '></textarea>
       <button id='mainButton' onclick='saveToDB()'>SAVE!</button>
+      <br>
+      <button id='titleButton' onclick='getTitle()'>Get Title</button>
     </div>
   	<div id="controls">
+      <h1 id='theTitle'>TEST</h1>
       <select id="encodingSelect" onchange="encoding = this.value;">
   			<option value="mp3" selected>MP3</option>
   			<option value="wav">WAV</option>
@@ -48,7 +52,6 @@
           firebase.initializeApp(config);
         </script>
       <!-- End Firebase Init -->
-
         <script src='js/db.js'></script>
         <script src="js/d3.js"></script> <!-- TODO: Swap to min on deployment -->
         <script src="js/jscolor.min.js"></script>
