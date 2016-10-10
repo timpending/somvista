@@ -25,12 +25,16 @@ var analyserContext = null;
 var canvasWidth, canvasHeight;
 var recIndex = 0;
 var encoding = 'mp3';
-
 var theRecording = null;
+var recObj = {};
+recObj.name = '';
+recObj.buffer = [];
+recObj.length = null;
+recObj.baseColor = 'hsl(180, 100%, 50%)'
+recObj.bgColor = '#fff'
 var grabCanvas = document.getElementById('canvas')
 
 // Slight Off-White for the Default Wave BG
-var canvasBackgroundColor = 'rgba(255,255,255, .87)'
 
 /* TODO:
 
@@ -53,14 +57,20 @@ function saveAudio() {
 }
 
 function gotBuffers( buffers ) {
+  var recordingName = document.getElementById("recordingName")
+  var canvas = document.getElementById( "output" );
+
   document.getElementById("output").innerHTML = '';
-    var canvas = document.getElementById( "output" );
+  document.getElementById("recordingName").innerHTML = '';
+
 
     // drawBuffer( canvas.width, canvas.height, canvas.getContext('2d'), buffers[0] );
 
 
-    // d3Canvas(canvas.width, canvas.height, canvas.getContext('2d'), buffers[0]);
+    // Creates a Recording Object for Server Storage
     theRecording = buffers[0];
+    recObj.buffer = buffers[0];
+    recObj.length = buffers[0].length;
 
     // Raw D3+SVG support.  Currently too browser intensive.
     // TODO: Move calc to serverside.  Find way to parse width, match file, and re-display
@@ -70,8 +80,13 @@ function gotBuffers( buffers ) {
     // } else {
     //
     // DRAWS THE CANVAS
+      recObj.name = prompt('Enter a name for your file')
+      if (recObj.name === ''){
+        recObj.name = 'Your SomVista'
+      }
       d3CanvasBuff(theRecording);
-    // }
+      recordingName.innerHTML = recObj.name
+      // }
 
     // Download Setup for Exporting the Recorded Audio File
     // if(encoding === 'mp3') {
@@ -82,15 +97,15 @@ function gotBuffers( buffers ) {
 }
 
 function doneEncoding( blob ) {
-  var fileName = prompt('Enter your filename')
-  if (fileName === ''){
-    fileName = 'aSoundbyte'
+  recObj.name = prompt('Enter your filename')
+  if (recObj.name === ''){
+    recObj.name = 'aSoundbyte'
   }
 
   if(encoding === 'mp3') {
-      Recorder.setupDownload( blob,  fileName + ".mp3" );
+      Recorder.setupDownload( blob,  recObj.name + ".mp3" );
     } else {
-      Recorder.setupDownload( blob, fileName + ".wav" );
+      Recorder.setupDownload( blob, recObj.name + ".wav" );
     }
     recIndex++;
     console.log('blob:');
@@ -204,7 +219,7 @@ function gotStream(stream) {
 
 function updateBGColor() {
   document.getElementById('output').innerHTML = '';
-  canvasBackgroundColor = '#' + document.getElementById('canvasColorSelector').value
+  recObj.bgColor = '#' + document.getElementById('canvasColorSelector').value
 
   // Raw D3+SVG support.  Currently too browser intensive.
   // TODO: Move calc to serverside.  Find way to parse width, match file, and re-display

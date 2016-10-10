@@ -29,7 +29,7 @@
 function d3Buffer (data) {
   var output = document.getElementById("output");
   output.innerHTML= '';
-  output.style.background = canvasBackgroundColor
+  output.style.background = recObj.bgColor
   // Variables
   var svgW = 1024;
   var svgH = 500;
@@ -107,7 +107,7 @@ function d3CanvasBuff(data){
         .attr('id', 'canvas')
         .attr('width', width)
         .attr('height', height)
-        .attr('style', 'background-color: '+canvasBackgroundColor + ';')
+        .attr('style', 'background-color: '+recObj.bgColor + ';')
 
     var nodeCtx = createCanvas.node().getContext('2d');
     console.log(data.length);
