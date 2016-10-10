@@ -67,7 +67,7 @@
   <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">SomVista</span>
     <nav class="mdl-navigation">
-      <a id="drawerSignOut" class="mdl-navigation__link" href="#"><i class="sign-out-icon button-left-icon material-icons">account_circle</i> Sign Out </a>
+      <a id="drawerSignOut" class="mdl-navigation__link" href="#"><i class="sign-out-icon button-left-icon material-icons">account_circle</i> Sign Out</a>
     </nav>
   </div>
   <!-- End Drawer Nav -->
@@ -91,6 +91,7 @@
       <!-- <canvas id="output" width='1024' height='500'></canvas> -->
       <div id="output"></div>
       <h6 id="recordingName"></h6>
+      <button id="recordingNameEditButton" onclick='updateRecName()'>Edit<i class="edit-name-icon button-right-icon material-icons">mode_edit</i>
   	</div>
 
     <div id="waveSettings">
@@ -123,6 +124,7 @@
         <script src='js/jquery-3.1.0.min.js'></script>
         <script src='js/auth.js'></script>
         <script src='js/db.js'></script>
+        <script src='js/edit-rec.js'></script>
         <script src="js/d3.js"></script> <!-- TODO: Swap to min on deployment -->
         <script src="js/jscolor.min.js"></script>
         <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script> -->
