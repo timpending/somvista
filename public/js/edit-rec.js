@@ -14,9 +14,32 @@ function updateBGColor() {
 }
 
 function updateRecName() {
+  if (recObj.length !== null){
+
+  //TODO: Swap these prompts into Dialog
   recObj.name = prompt('Enter a name for your file')
   if (recObj.name === ''){
     recObj.name = 'Your SomVista'
   }
   document.getElementById('recordingName').innerHTML = recObj.name
+  } else {
+    alert('You need to record first!')
+  }
+}
+
+function deleteRec() {
+  if (recObj.length !== null){
+    var ask = confirm('Are you sure you want to delete your SomVista-piece?')
+    if (ask == true){
+
+      recObj.name = '';
+      recObj.buffer = [];
+      recObj.length = null;
+      recObj.baseColor = 'hsl(180, 100%, 50%)'
+      recObj.bgColor = '#fff'
+      document.getElementById('recordingName').innerHTML = '';
+      document.getElementById('output').innerHTML = '';
+    }
+  }
+
 }
