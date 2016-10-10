@@ -43,9 +43,7 @@
 
 
     <!-- Auth Overlay for Login -->
-    <div class='login-cover'>
-      <div id="pageLoader" class="page-loader mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
-    </div>
+    <div class='login-cover'></div>
 
 <!-- MAIN -->
 
@@ -59,7 +57,7 @@
       <div class="mdl-layout-spacer"></div>
       <!-- Navigation -->
       <nav class="mdl-navigation">
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Sign Out <i class="sign-out-icon button-right-icon material-icons">account_circle</i></button>
+        <button id='signOutButton' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Sign Out <i class="sign-out-icon button-right-icon material-icons">account_circle</i></button>
       </nav>
     </div>
   </header>
@@ -69,7 +67,7 @@
   <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">SomVista</span>
     <nav class="mdl-navigation">
-      <a class="mdl-navigation__link" href=""><i class="sign-out-icon button-left-icon material-icons">account_circle</i> Sign Out </a>
+      <a id="drawerSignOut" class="mdl-navigation__link" href="#"><i class="sign-out-icon button-left-icon material-icons">account_circle</i> Sign Out </a>
     </nav>
   </div>
   <!-- End Drawer Nav -->

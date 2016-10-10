@@ -1,10 +1,9 @@
+// LOGIN
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     // User is signed in.
     $('.login-cover').hide();
-    $('#pageLoader').show();
-
-     var dialog = document.querySelector('#loginDialog');
+    var dialog = document.querySelector('#loginDialog');
 
      if (! dialog.showModal) {
       dialogPolyfill.registerDialog(dialog);
@@ -16,8 +15,6 @@ firebase.auth().onAuthStateChanged(function(user) {
   } else {
     // No user is signed in.
     $('.login-cover').show();
-    $('#page-loader').hide();
-
      var dialog = document.querySelector('#loginDialog');
 
      if (! dialog.showModal) {
@@ -33,7 +30,6 @@ $('#loginButton').click(function(){
   var pw = $('#loginPassword').val();
 
   if (email != '' && pw != ''){
-
     $('#loginLoader').show()
     $('#loginButton').hide()
 
@@ -44,10 +40,23 @@ $('#loginButton').click(function(){
       $('#loginError').show().text(errorMessage)
       $('#loginLoader').hide()
       $('#loginButton').show()
-    });
-
-  } else {
-
+    })
   }
+})
 
+
+// LOGOUT
+$('#signOutButton').click(function(){
+  firebase.auth().signOut().then(function() {
+  // Sign-out successful.
+  $('#loginError').hide().text('');
+  $('#loginEmail').val('');
+  $('#loginPassword').val('');
+  $('#loginLoader').hide();
+  $('.login-cover').show();
+  $('#loginButton').show();
+  }, function(error) {
+    // An error happened.
+    alert(error.message)
+  });
 })
