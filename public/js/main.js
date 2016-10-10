@@ -28,7 +28,9 @@ var encoding = 'mp3';
 
 var theRecording = null;
 var grabCanvas = document.getElementById('canvas')
-var canvasBackgroundColor = 'rgba(255,50,100, 1)'
+
+// Slight Off-White for the Default Wave BG
+var canvasBackgroundColor = 'rgba(255,255,255, .87)'
 
 /* TODO:
 
@@ -60,16 +62,18 @@ function gotBuffers( buffers ) {
     // d3Canvas(canvas.width, canvas.height, canvas.getContext('2d'), buffers[0]);
     theRecording = buffers[0];
 
-    if (theRecording.length <=100000) {
-      console.log('data length ', theRecording.length);
-      d3Buffer(theRecording);
-    } else {
-      console.log('data length ', theRecording.length);
+    // Raw D3+SVG support.  Currently too browser intensive.
+    // TODO: Move calc to serverside.  Find way to parse width, match file, and re-display
+    // if (theRecording.length <=100000) {
+    //   console.log('data length ', theRecording.length);
+    //   d3Buffer(theRecording);
+    // } else {
+    //
+    // DRAWS THE CANVAS
       d3CanvasBuff(theRecording);
-    }
+    // }
 
-    // the ONLY time gotBuffers is called is right after a new recording is completed -
-    // so here's where we should set up the download.
+    // Download Setup for Exporting the Recorded Audio File
     // if(encoding === 'mp3') {
     //   audioRecorder.exportMP3( doneEncoding );
     //  } else {
@@ -202,13 +206,15 @@ function updateBGColor() {
   document.getElementById('output').innerHTML = '';
   canvasBackgroundColor = '#' + document.getElementById('canvasColorSelector').value
 
-  if (theRecording.length <=100000) {
-    console.log('data length ', theRecording.length);
-    d3Buffer(theRecording);
-  } else {
+  // Raw D3+SVG support.  Currently too browser intensive.
+  // TODO: Move calc to serverside.  Find way to parse width, match file, and re-display
+  // if (theRecording.length <=100000) {
+  //   console.log('data length ', theRecording.length);
+  //   d3Buffer(theRecording);
+  // } else {
     console.log('data length ', theRecording.length);
     d3CanvasBuff(theRecording);
-  }
+  // }
 }
 
 function initAudio() {

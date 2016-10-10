@@ -19,6 +19,9 @@
 
   <body>
 
+    <!-- Auth Overlay for Login -->
+    <div class='login-cover'></div>
+
     <!-- Login Dialog -->
     <dialog id="loginDialog" class="mdl-dialog">
       <h4 class="mdl-dialog__title">Sign In</h4>
@@ -42,11 +45,7 @@
     </dialog>
   <!-- End Login Dialog -->
 
-
-    <!-- Auth Overlay for Login -->
-    <div class='login-cover'></div>
-
-<!-- MAIN -->
+<!-- NAV START -->
 
 <!-- Start Full Nav -->
 <div class="demo-layout-transparent mdl-layout mdl-js-layout">
@@ -72,18 +71,12 @@
     </nav>
   </div>
   <!-- End Drawer Nav -->
+  <!-- End Nav -->
+
+  <!-- Start MAIN -->
 
   <main class="mdl-layout__content">
-    <div id="testArea">
-      <textarea id='mainText' placeholder='text here ... '></textarea>
-      <textarea id='human' placeholder='name here ... '></textarea>
-      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='mainButton' onclick='saveToDB()'>SAVE!</button>
-      <br>
-      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='titleButton' onclick='getTitle()'>Get Title</button>
-    </div>
-
   	<div id="controls">
-      <h1 id='theTitle'>TEST</h1>
       <select id="encodingSelect" onchange="encoding = this.value;">
   			<option value="mp3" selected>MP3</option>
   			<option value="wav">WAV</option>
@@ -91,18 +84,22 @@
   		<img id="record" src="img/mic128.png" onclick="toggleRecording(this);">
   		<a id="save" href="#"><img src="img/save.svg"></a>
       <button id="downloadPDF" onclick="downloadPDF()">PDF</button>
-
-      <form onsubmit="event.preventDefault(); updateBGColor();">
-        <input name="color2" type="hidden" id="canvasColorSelector">
-        <button type='submit' class="jscolor {valueElement: 'canvasColorSelector'}" id='canvasColorSelector'>Change the Background Color</button>
-        <input type='submit' />
-      </form>
   	</div>
+
     <div id="viz">
   		<canvas id="analyser" width="1024" height="500"></canvas>
       <!-- <canvas id="output" width='1024' height='500'></canvas> -->
       <div id="output"></div>
   	</div>
+
+    <div id="waveSettings">
+      <form onsubmit="event.preventDefault(); updateBGColor();">
+        <input name="color2" type="hidden" id="canvasColorSelector">
+        <button type='submit' class="jscolor {valueElement: 'canvasColorSelector'}" id='canvasColorSelector'>Change the Background Color</button>
+        <input type='submit' />
+      </form>
+    </div>
+
   </main>
 </div>
 
