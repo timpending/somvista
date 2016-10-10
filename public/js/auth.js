@@ -29,10 +29,6 @@ $('#loginButton').click(function(){
   var email = $('#loginEmail').val();
   var pw = $('#loginPassword').val();
 
-  if (email != '' && pw != ''){
-    $('#loginLoader').show()
-    $('#loginButton').hide()
-
     firebase.auth().signInWithEmailAndPassword(email, pw).catch(function(error) {
       // Handle Errors here.
       var errorCode = error.code;
@@ -41,9 +37,7 @@ $('#loginButton').click(function(){
       $('#loginLoader').hide()
       $('#loginButton').show()
     })
-  }
 })
-
 
 // LOGOUT
 $('#signOutButton').click(function(){
@@ -59,4 +53,21 @@ $('#signOutButton').click(function(){
     // An error happened.
     alert(error.message)
   });
+})
+
+// REGISTER
+$('#registerButton').click(function(){
+  var email = $('#loginEmail').val();
+  var pw = $('#loginPassword').val();
+
+  firebase.auth().createUserWithEmailAndPassword(email, pw).catch(function(error){
+
+  var errorCode = error.code;
+  var errorMessage = error.message;
+
+  $('#loginError').show().text(errorMessage)
+  $('#loginLoader').hide()
+  $('#loginButton').show()
+
+  })
 })
