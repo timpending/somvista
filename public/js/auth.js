@@ -54,6 +54,22 @@ $('#signOutButton').click(function(){
     alert(error.message)
   });
 })
+$('#drawerSignOut').click(function(){
+  firebase.auth().signOut().then(function() {
+  // Sign-out successful.
+  $('.mdl-layout__drawer').hide()
+  $('#loginError').hide().text('');
+  $('#loginEmail').val('');
+  $('#loginPassword').val('');
+  $('#loginLoader').hide();
+  $('.login-cover').show();
+  $('#loginButton').show();
+  }, function(error) {
+    // An error happened.
+    alert(error.message)
+  });
+})
+
 
 // REGISTER
 $('#registerButton').click(function(){
