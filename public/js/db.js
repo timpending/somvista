@@ -15,16 +15,14 @@ function getTitle() {
   var title = document.getElementById('theTitle')
 
 
-  // newTitle.on('value', function(snapshot){
-  //   var temp = snapshot.val();
-  //   title.innerHTML = temp
-  // })
-
-  newTitle.once('value').then(function(snapshot){
+  newTitle.on('value', function(snapshot){
     var temp = snapshot.val();
     title.innerHTML = temp
   })
-
+  // newTitle.once('value').then(function(snapshot){
+  //   var temp = snapshot.val();
+  //   title.innerHTML = temp
+  // })
 }
 // newTitle.on('value', function(snapshot){
 //   title.innerHTML = 'hello'

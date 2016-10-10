@@ -3,17 +3,84 @@
   <head>
   	<meta name="viewport" content="width=device-width,initial-scale=1">
   	<title>Audio Recorder</title>
+
+    <!-- Material Design Lite -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.teal-indigo.min.css" />
+    <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+
+    <!-- Dialog Polyfill -->
+    <script src="js/dialog-polyfill.js"></script>
+    <link rel="stylesheet" type="text/css" href="dialog-polyfill.css" />
+
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="record-d3.css" media="screen" title="no title">
   </head>
 
   <body>
+
+    <!-- Login Dialog -->
+    <dialog id="loginDialog" class="mdl-dialog">
+      <h4 class="mdl-dialog__title">Sign In</h4>
+      <div class="mdl-dialog__content">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input class="mdl-textfield__input" type="text" id="sample3">
+          <label class="mdl-textfield__label" for="sample3">Email</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input class="mdl-textfield__input" type="text" id="sample3">
+          <label class="mdl-textfield__label" for="sample3">Password</label>
+        </div>
+      </div>
+
+      <div class="mdl-dialog__actions">
+        <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Sign In</button>
+      </div>
+    </dialog>
+  <!-- End Login Dialog -->
+
+
+    <!-- Auth Overlay for Login -->
+    <div class='login-cover'>
+      <div id="p2" class="page-loader mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+    </div>
+
+<!-- MAIN -->
+
+<!-- Start Full Nav -->
+<div class="demo-layout-transparent mdl-layout mdl-js-layout">
+  <header class="mdl-layout__header mdl-layout__header--transparent">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">SomVista</span>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation -->
+      <nav class="mdl-navigation">
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Sign Out <i class="sign-out-icon button-right-icon material-icons">account_circle</i></button>
+      </nav>
+    </div>
+  </header>
+  <!-- End Full Nav-->
+
+  <!-- Start Drawer Nav-->
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">SomVista</span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href=""><i class="sign-out-icon button-left-icon material-icons">account_circle</i> Sign Out </a>
+    </nav>
+  </div>
+  <!-- End Drawer Nav -->
+
+  <main class="mdl-layout__content">
     <div id="testArea">
       <textarea id='mainText' placeholder='text here ... '></textarea>
       <textarea id='human' placeholder='name here ... '></textarea>
-      <button id='mainButton' onclick='saveToDB()'>SAVE!</button>
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='mainButton' onclick='saveToDB()'>SAVE!</button>
       <br>
-      <button id='titleButton' onclick='getTitle()'>Get Title</button>
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='titleButton' onclick='getTitle()'>Get Title</button>
     </div>
+
   	<div id="controls">
       <h1 id='theTitle'>TEST</h1>
       <select id="encodingSelect" onchange="encoding = this.value;">
@@ -35,6 +102,15 @@
       <!-- <canvas id="output" width='1024' height='500'></canvas> -->
       <div id="output"></div>
   	</div>
+  </main>
+</div>
+
+
+
+
+
+
+
 
     <!-- Scripts Start -->
 
@@ -52,6 +128,8 @@
           firebase.initializeApp(config);
         </script>
       <!-- End Firebase Init -->
+        <script src='js/jquery-3.1.0.min.js'></script>
+        <script src='js/auth.js'></script>
         <script src='js/db.js'></script>
         <script src="js/d3.js"></script> <!-- TODO: Swap to min on deployment -->
         <script src="js/jscolor.min.js"></script>
