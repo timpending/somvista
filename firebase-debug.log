@@ -1,0 +1,22 @@
+[debug] ----------------------------------------------------------------------
+[debug] Command:      /Users/TimPender/.nvm/versions/node/v6.2.2/bin/node /Users/TimPender/.nvm/versions/node/v6.2.2/bin/firebase deploy
+[debug] CLI Version:  3.0.8
+[debug] Platform:     darwin
+[debug] Node Version: v6.2.2
+[debug] Time:         Mon Oct 10 2016 10:08:15 GMT-0600 (MDT)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase"]
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/sound-2-sight 
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/sound-2-sight/tokens 
+[debug] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'sound-2-sight'...
+[info] 
+[info] i  deploying database, hosting
+[info] ✔  database: rules ready to deploy.
+[info] i  hosting: preparing public directory for upload...
+[debug] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/sound-2-sight/uploads/-KTjLW4U61p_SgeKyw-X?fileCount=20&message= 
+[debug] <<< HTTP RESPONSE 200
+[info] ✔  hosting: public folder uploaded successfully

@@ -4,14 +4,35 @@
   	<meta name="viewport" content="width=device-width,initial-scale=1">
   	<title>See your Sounds</title>
     <link rel="stylesheet" href="index.css" media="screen" title="no title">
-    <script src="js/d3.js"></script>
-    <script src="js/jscolor.min.js"></script>
+
+
   </head>
   <body>
     	<a href='record.html'> Click here to record a sound clip</a>
       <hr>
       <a href='record-d3.html'>TESTER ZONER</a>
     <div id='output'></div>
+
+
+    <!-- Script Start -->
+    <!-- Firebase Init -->
+    <script src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyDZ3cMZ2bemqLARKEGMiIZGLI-3deGhOEo",
+        authDomain: "sound-2-sight.firebaseapp.com",
+        databaseURL: "https://sound-2-sight.firebaseio.com",
+        storageBucket: "sound-2-sight.appspot.com",
+        messagingSenderId: "526816102819"
+      };
+      firebase.initializeApp(config);
+    </script>
+  <!-- End Firebase Init -->
+
+    <script src='js/db.js'></script>
+    <script src="js/d3.js"></script>
+    <script src="js/jscolor.min.js"></script>
 
     <!-- D3 Testing Zone -->
     <script type='text/javascript'>
