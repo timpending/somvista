@@ -6,6 +6,8 @@ function showUser() {
 
 function resetRecordings() {
   firebaseDB.ref('users/' + firebase.auth().currentUser.uid + '/recordings').remove();
+  firebaseDB.ref('users/' + firebase.auth().currentUser.uid + '/recObj').remove();
+  console.log('DB RESET');
 }
 
 function writeUserToDB(currentUser){
@@ -19,13 +21,11 @@ function writeUserToDB(currentUser){
   user.uid = firebase.auth().currentUser.uid
 }
 
-function saveRec(){
-  var newName = prompt(recObj.name)
-  recObj.name = newName
-  firebaseDB.ref('users/' + firebase.auth().currentUser.uid + '/recordings/' + recObj.name).set({
-    name: recObj.name,
-    recordingArray: recObj.buffer
-  })
+function saveRecObj(){
+  var newName = prompt('Your current file name is ' + recObj.name + '. Please enter a name to save in your database.  Note that duplicate files names will be overwritten with the most recent entry.')
+  if (newName !== '') {
+      recObj.name = newName
+  }
   firebaseDB.ref('users/' + firebase.auth().currentUser.uid + '/recObj/' + recObj.name).set({
     name: recObj.name,
     length: recObj.length,
@@ -33,7 +33,15 @@ function saveRec(){
     bgColor: recObj.bgColor
   })
   // TODO Save Recording Separately.  Only Call when saving, re-loading the item
-  console.log('Saved in DB!');
+  console.log('Saved obj in DB!');
+}
+
+function saveRec(){
+  firebaseDB.ref('users/' + firebase.auth().currentUser.uid + '/recordings/' + recObj.name).set({
+    name: recObj.name,
+    recordingArray: recObj.buffer
+  })
+  console.log('Saved recording in DB!');
 }
 
 function listRec() {
