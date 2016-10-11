@@ -11,7 +11,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
      dialog.close();
 
-
+     createUserObj();
   } else {
     // No user is signed in.
     $('.login-cover').show();
@@ -37,10 +37,12 @@ $('#loginButton').click(function(){
       $('#loginLoader').hide()
       $('#loginButton').show()
     })
+  createUserObj();
 })
 
 // LOGOUT
 $('#signOutButton').click(function(){
+  resetRecAndUserObjs()
   firebase.auth().signOut().then(function() {
   // Sign-out successful.
   $('#loginError').hide().text('');
@@ -52,9 +54,11 @@ $('#signOutButton').click(function(){
   }, function(error) {
     // An error happened.
     alert(error.message)
-  });
+  })
 })
+
 $('#drawerSignOut').click(function(){
+  resetRecAndUserObjs()
   firebase.auth().signOut().then(function() {
   // Sign-out successful.
   $('.mdl-layout__drawer').hide()
@@ -86,11 +90,28 @@ $('#registerButton').click(function(){
   $('#loginButton').show()
 
   })
+  createUserObj();
 })
 
 // User Object Creation
 function createUserObj() {
-  var currentUser = firebase.auth().currentUser;
+  var currentUser = firebase.auth().currentUser
   user.uid = currentUser.uid
   user.email = currentUser.email
+}
+
+function resetRecAndUserObjs() {
+  // Destroy User Constructor Object
+  user = {};
+  user.email = '';
+  user.uid = '';
+
+  // Destroy Recording Object
+  theRecording = null;
+  recObj = {};
+  recObj.name = '';
+  recObj.buffer = [];
+  recObj.length = null;
+  recObj.baseColor = 'hsl(180, 100%, 50%)'
+  recObj.bgColor = '#fff'
 }
