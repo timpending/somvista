@@ -76,20 +76,20 @@ function gotBuffers( buffers ) {
 
     // Raw D3+SVG support.  Currently too browser intensive.
     // TODO: Move calc to serverside.  Find way to parse width, match file, and re-display
-    if (theRecording.length <=150000) {
+    // if (theRecording.length <=150000) {
       recObj.name = prompt('Enter a name for your file')
       console.log('data length ', theRecording.length);
-      d3Buffer(theRecording);
-    } else {
+      // d3Buffer(theRecording);
+    // } else {
     //
     // DRAWS THE CANVAS
-      recObj.name = prompt('Enter a name for your file')
-      if (recObj.name === ''){
-        recObj.name = 'Your SomVista'
-      }
+      // recObj.name = prompt('Enter a name for your file')
+      // if (recObj.name === ''){
+      //   recObj.name = 'Your SomVista'
+      // }
       d3CanvasBuff(theRecording);
       recordingName.innerHTML = recObj.name
-      }
+      // }
 
     // Download Setup for Exporting the Recorded Audio File
     // if(encoding === 'mp3') {

@@ -99,8 +99,12 @@ body {
   margin: 0 0;
 }
 
+.mdl-grid {
+    max-width: 1024px;
+}
+
 /*Future & Custom Settings */
-#encodingSelect, #downloadPDF {
+#encodingSelect {
   display: none;
 }
 
@@ -110,6 +114,7 @@ canvas {
 }
 
 #output {
+  margin: 0 auto;
   display: inline-block;
   margin-top: 15px;
   box-shadow: 0px 0px 10px grey;

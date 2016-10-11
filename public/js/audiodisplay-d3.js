@@ -1,7 +1,7 @@
 function d3Buffer (data) {
   var output = document.getElementById("output");
   output.innerHTML= '';
-  output.style.background = recObj.bgColor
+  output.style.background = recObj.bgColor;
   // Variables
   var svgW = 1024;
   var svgH = 500;
@@ -79,11 +79,16 @@ function d3CanvasBuff(data){
         .attr('id', 'canvas')
         .attr('width', width)
         .attr('height', height)
-        .attr('style', 'background-color: '+recObj.bgColor + ';')
+        // .attr('style', 'background-color: '+recObj.bgColor + ';')
 
     var nodeCtx = createCanvas.node().getContext('2d');
     console.log(data.length);
+    console.log('background color : ', recObj.bgColor);
 
+    nodeCtx.beginPath()
+    nodeCtx.rect(0,0,width, height)
+    nodeCtx.fillStyle = recObj.bgColor
+    nodeCtx.fill();
 
       data.forEach(function(d, i){
         var rectWidth = i/data.length
@@ -171,18 +176,34 @@ function d3CanvasBuff(data){
 //       })
 // }
 
-// Start of saving to pdf function.  Png might work better
-function downloadPDF() {
-  // var imgData = grabCanvas.toDataURL("image/jpeg", 1.0);
-  var pdf = new jsPDF();
+// DOWNLOAD THE CANVAS
+// Black BG Only in PDF format
+// Start of saving to pdf function.  Png might work better - JS PDF Download. Not Ideal
+// document.getElementById('downloadPDF').addEventListener("click", function() {
+//   var canvas = document.getElementById('canvas');
+//
+//   // only jpeg is supported by jsPDF
+//   var imgData = canvas.toDataURL("image/jpeg", 1.0);
+//   var pdf = new jsPDF('landscape');
+//
+//   pdf.addImage(imgData, 'JPEG', 10, 10);
+//   var download = document.getElementById('download');
+//
+//   pdf.save(recObj.name+'.pdf');
+// }, false);
 
-  pdf.addImage(pdfDataURL, 'JPEG', 0, 0);
-  var download = document.getElementById('downloadPDF');
+// DOWNLOAD THE CURVE ONLY
+$('#downloadIMG').click(function(){
+     $(this).parent().attr('href', document.getElementById('canvas').toDataURL());
+     $(this).parent().attr('download', recObj.name +".png");
+});
+//
+// $('#canvas').click(function(){
+//     $(this).parent().attr('href', document.getElementById('canvas').toDataURL());
+//     $(this).parent().attr('download', "myPicture.png");
+// });
 
-  pdf.save("download.pdf");
-  }
-//   , false);
-// }
+
 
   // ctx.fillStyle = "red";
   // ctx (startX, endX, startY, endY)
