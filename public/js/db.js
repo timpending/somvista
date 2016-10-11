@@ -18,5 +18,12 @@ function writeUserToDB(currentUser){
 function saveRec(){
   var newName = prompt(recObj.name)
   recObj.name = newName
+  firebaseDB.ref('users/' + currentUser.uid + 'recordings' + recObj.name).set({
+    name: recObj.name,
+    recordingArray: recObj.buffer,
+    length: recObj.length,
+    baseColor: recObj.baseColor,
+    bgColor: recObj.bgColor
+  })
   console.log(recObj);
 }
