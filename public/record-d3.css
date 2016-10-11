@@ -31,7 +31,6 @@
 }
 /*Uses a transparent header that draws on top of the layout's background*/
 .demo-layout-transparent {
-  background: url('../assets/demos/transparent.jpg') center / cover;
 }
 .demo-layout-transparent .mdl-layout__header,
 .demo-layout-transparent .mdl-layout__drawer-button {
@@ -42,7 +41,7 @@
 
 .right-align {
   float:right;
-  width: 30vw;
+  width: 50vw;
   padding: 0;
   margin: 0;
   list-style: none;
@@ -98,13 +97,13 @@ body {
 
 canvas {
   display: inline-block;
-  box-shadow: 0px 0px 10px blue;
+  box-shadow: 0px 0px 10px grey;
 }
 
 #output {
   display: inline-block;
   margin-top: 15px;
-  box-shadow: 0px 0px 10px blue;
+  box-shadow: 0px 0px 10px grey;
 }
 
 #controls {
@@ -132,6 +131,18 @@ canvas {
   align-items: center;
 }
 
+#analyser {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 15vh;
+}
+
+#main {
+  display: inline-block;
+}
 @media (orientation: landscape) {
   body { flex-direction: row;}
   #controls { flex-direction: column; height: 100%; width: 10%;}
