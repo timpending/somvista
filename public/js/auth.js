@@ -87,3 +87,10 @@ $('#registerButton').click(function(){
 
   })
 })
+
+// User Object Creation
+function createUserObj() {
+  var currentUser = firebase.auth().currentUser;
+  user.uid = currentUser.uid
+  user.email = currentUser.email
+}

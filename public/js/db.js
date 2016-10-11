@@ -1,5 +1,8 @@
 var firebaseDB = firebase.database().ref()
 
+function showUser() {
+  console.log(user);
+}
 //
 // function saveToDB() {
 //   var mainText = document.getElementById('mainText')
