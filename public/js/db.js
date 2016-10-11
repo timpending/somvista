@@ -14,3 +14,9 @@ function writeUserToDB(currentUser){
  })
   user.uid = currentUser.uid
 }
+
+function saveRec(){
+  var newName = prompt(recObj.name)
+  recObj.name = newName
+  console.log(recObj);
+}
