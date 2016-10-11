@@ -77,7 +77,7 @@ function gotBuffers( buffers ) {
 
     // Raw D3+SVG support.  Currently too browser intensive.
     // TODO: Move calc to serverside.  Find way to parse width, match file, and re-display
-    if (theRecording.length <=200000) {
+    if (theRecording.length <=150000) {
       console.log('data length ', theRecording.length);
       d3Buffer(theRecording);
     } else {

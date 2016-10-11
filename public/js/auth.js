@@ -10,8 +10,9 @@ firebase.auth().onAuthStateChanged(function(user) {
       }
 
      dialog.close();
+     console.log(user);
+     createUserObj(firebase.auth().currentUser);
 
-     createUserObj();
   } else {
     // No user is signed in.
     $('.login-cover').show();
@@ -37,7 +38,7 @@ $('#loginButton').click(function(){
       $('#loginLoader').hide()
       $('#loginButton').show()
     })
-  createUserObj();
+  createUserObj(firebase.auth().currentUser);
 })
 
 // LOGOUT
@@ -90,12 +91,11 @@ $('#registerButton').click(function(){
   $('#loginButton').show()
 
   })
-  createUserObj();
+  createUserObj(firebase.auth().currentUser);
 })
 
 // User Object Creation
-function createUserObj() {
-  var currentUser = firebase.auth().currentUser
+function createUserObj(currentUser) {
   user.uid = currentUser.uid
   user.email = currentUser.email
 }
