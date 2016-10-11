@@ -39,10 +39,47 @@
      your background is light. */
   color: rgba(0,0,0,0.87);
 }
+
+.right-align {
+  float:right;
+  width: 30vw;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  -ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+}
 /* End Navigation */
 
 
 /* Page Wide Settings */
+.flex-container {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  -ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.space-around {
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+}
+
 body {
   font: 14pt Arial, sans-serif;
   background: #f1f1f1;
@@ -71,7 +108,7 @@ canvas {
 }
 
 #controls {
-  display: flex;
+  display: none;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
@@ -79,12 +116,8 @@ canvas {
   width: 100%;
 }
 
-#record { height: 15vh; }
 #record.recording {
-  background: red;
-  background: -webkit-radial-gradient(center, ellipse cover, #ff0000 0%,lightgrey 75%,lightgrey 100%,#7db9e8 100%);
-  background: -moz-radial-gradient(center, ellipse cover, #ff0000 0%,lightgrey 75%,lightgrey 100%,#7db9e8 100%);
-  background: radial-gradient(center, ellipse cover, #ff0000 0%,lightgrey 75%,lightgrey 100%,#7db9e8 100%);
+  background: rgba(255, 0, 0, 0.87);
 }
 
 #save, #save img { height: 10vh; }
