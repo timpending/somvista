@@ -156,7 +156,7 @@ function updateAnalysers(time) {
 
     // analyzer draw code here
     {
-        var SPACING = 5;
+        var SPACING = 6;
         var BAR_WIDTH = 4;
         var numBars = Math.round(canvasWidth / SPACING);
         var freqByteData = new Uint8Array(analyserNode.frequencyBinCount);

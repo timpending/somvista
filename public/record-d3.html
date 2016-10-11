@@ -48,39 +48,26 @@
 <!-- NAV START -->
 
 <!-- Start Full Nav -->
-<div class="demo-layout-transparent mdl-layout mdl-js-layout">
-  <header class="mdl-layout__header mdl-layout__header--transparent">
-    <div class="mdl-layout__header-row">
-      <!-- Title -->
-      <span class="mdl-layout-title">SomVista</span>
+<div class="demo-layout-transparent mdl-layout mdl-layout--fixed-header">
+  <div id="viz">
+    <canvas id="analyser"></canvas>
+    <!-- <canvas id="output" width='1024' height='500'></canvas> -->
+  </div>
+  <header class="mdl-layout__header">
+    <div class="head-row mdl-layout__header-row">
       <!-- Add spacer, to align navigation to the right -->
-      <div class="mdl-layout-spacer"></div>
+      <!-- Title -->
+      <span class="mdl-layout-title right-align">SomVista</span>
       <!-- Navigation -->
-      <nav class="mdl-navigation">
         <div class='right-align'>
-          <button id="record" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="toggleRecording(this);">Record <i class="button-right-icon material-icons">mic</i></button>
-          <button id='showUserButton' onclick='resetRecordings()' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">RESET</button>
-          <button id='showUserButton' onclick='showUser()' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Show User<i class="sign-out-icon button-right-icon material-icons">account_circle</i></button>
-          <button id='signOutButton' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Sign Out <i class="sign-out-icon button-right-icon material-icons">account_circle</i></button>
+          <button id="record" class="header-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="toggleRecording(this);">Record <i class="button-right-icon material-icons">mic</i></button>
+          <button id='signOutButton' class="header-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Sign Out <i class="sign-out-icon button-right-icon material-icons">account_circle</i></button>
         </div>
-      </nav>
     </div>
   </header>
   <!-- End Full Nav-->
 
-  <!-- Start Drawer Nav-->
-  <div class="mdl-layout__drawer">
-    <span class="mdl-layout-title">SomVista</span>
-    <nav class="mdl-navigation">
-      <a id='drawerShowUserButton' onclick='showUser()' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="javascript:void(0)">Show User<i class="sign-out-icon button-right-icon material-icons">account_circle</i></a>
-      <a id="drawerSignOut" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="javascript:void(0)"><i class="sign-out-icon button-left-icon material-icons">account_circle</i> Sign Out</a>
-    </nav>
-  </div>
-  <!-- End Drawer Nav -->
-  <!-- End Nav -->
-
   <!-- Start MAIN -->
-
   <main class="mdl-layout__content">
   	<div id="controls">
       <select id="encodingSelect" onchange="encoding = this.value;">
@@ -91,11 +78,6 @@
   		<!-- <a id="save" href="#"><img src="img/save.svg"></a> -->
       <!-- <button id="downloadPDF" onclick="downloadPDF()">PDF</button> -->
   	</div>
-
-    <div id="viz">
-  		<canvas id="analyser"></canvas>
-      <!-- <canvas id="output" width='1024' height='500'></canvas> -->
-    </div>
     <div id="main">
       <div id="output"></div>
       <h6 id="recordingName"></h6>
@@ -114,6 +96,9 @@
         <input type='submit' />
       </form>
     </div>
+    <hr>
+    <button id='showUserButton' onclick='resetRecordings()' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">RESET</button>
+    <button id='showUserButton' onclick='showUser()' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Show User<i class="sign-out-icon button-right-icon material-icons">account_circle</i></button>
 
   </main>
 </div>
