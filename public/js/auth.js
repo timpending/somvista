@@ -52,6 +52,7 @@ $('#signOutButton').click(function(){
   $('#loginLoader').hide();
   $('.login-cover').show();
   $('#loginButton').show();
+  $('#output').empty();
   }, function(error) {
     // An error happened.
     alert(error.message)
@@ -69,6 +70,7 @@ $('#drawerSignOut').click(function(){
   $('#loginLoader').hide();
   $('.login-cover').show();
   $('#loginButton').show();
+  $('#output').empty();
   }, function(error) {
     // An error happened.
     alert(error.message)
