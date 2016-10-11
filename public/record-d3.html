@@ -57,6 +57,7 @@
       <div class="mdl-layout-spacer"></div>
       <!-- Navigation -->
       <nav class="mdl-navigation">
+        <button id='showUserButton' onclick='resetRecordings()' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">RESET</button>
         <button id='showUserButton' onclick='showUser()' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Show User<i class="sign-out-icon button-right-icon material-icons">account_circle</i></button>
         <button id='signOutButton' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Sign Out <i class="sign-out-icon button-right-icon material-icons">account_circle</i></button>
       </nav>
@@ -68,8 +69,8 @@
   <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">SomVista</span>
     <nav class="mdl-navigation">
-      <a id='drawerShowUserButton' onclick='showUser()' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="#">Show User<i class="sign-out-icon button-right-icon material-icons">account_circle</i></a>
-      <a id="drawerSignOut" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="#"><i class="sign-out-icon button-left-icon material-icons">account_circle</i> Sign Out</a>
+      <a id='drawerShowUserButton' onclick='showUser()' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="javascript:void(0)">Show User<i class="sign-out-icon button-right-icon material-icons">account_circle</i></a>
+      <a id="drawerSignOut" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="javascript:void(0)"><i class="sign-out-icon button-left-icon material-icons">account_circle</i> Sign Out</a>
     </nav>
   </div>
   <!-- End Drawer Nav -->
@@ -96,6 +97,9 @@
       <button id="recordingNameEditButton" onclick='updateRecName()'>Edit Rec. Name<i class="edit-name-icon button-right-icon material-icons">mode_edit</i>
       <button id="deleteRecording" onclick="deleteRec()">Delete Rec.<i class="edit-name-icon button-right-icon material-icons">delete_forever</i></button>
       <button id="saveRecording" onclick="saveRec()">Save Rec.<i class="edit-name-icon button-right-icon material-icons">save</i></button>
+      <button id='loadRecording' onclick='listRec()'>Load Past Rec.<i class="edit-name-icon button-right-icon material-icons">cloud_download</i>
+        <ul id="recordingList"></ul>
+      </button>
   	</div>
 
     <div id="waveSettings">
