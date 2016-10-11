@@ -34,7 +34,6 @@ recObj.baseColor = 'hsl(180, 100%, 50%)'
 recObj.bgColor = '#fff'
 var grabCanvas = document.getElementById('canvas')
 var user = {};
-user.email = '';
 user.uid = '';
 
 // Slight Off-White for the Default Wave BG

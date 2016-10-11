@@ -10,8 +10,9 @@ firebase.auth().onAuthStateChanged(function(user) {
       }
 
      dialog.close();
-     console.log(user);
-     createUserObj(firebase.auth().currentUser);
+
+     writeUserToDB(firebase.auth().currentUser);
+     user.uid = firebase.auth().currentUser.uid
 
   } else {
     // No user is signed in.
@@ -38,7 +39,6 @@ $('#loginButton').click(function(){
       $('#loginLoader').hide()
       $('#loginButton').show()
     })
-  createUserObj(firebase.auth().currentUser);
 })
 
 // LOGOUT
@@ -91,19 +91,18 @@ $('#registerButton').click(function(){
   $('#loginButton').show()
 
   })
-  createUserObj(firebase.auth().currentUser);
+  // createUserObj(firebase.auth().currentUser);
+  setTimeout(writeUserToDB(firebase.auth().currentUser), 500);
 })
 
 // User Object Creation
 function createUserObj(currentUser) {
   user.uid = currentUser.uid
-  user.email = currentUser.email
 }
 
 function resetRecAndUserObjs() {
   // Destroy User Constructor Object
   user = {};
-  user.email = '';
   user.uid = '';
 
   // Destroy Recording Object
