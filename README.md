@@ -1,6 +1,5 @@
-# Capstone Submission - TIM PENDER
-Submit your capstone ideas here for approval. Fork, clone, and send a pull request with these details about your app:
-
+# SomVista
+A deployed version of the web app can be found [here](www.SomVista.com).  
 
 # Documentation links:
   - MDN Web Audio API: https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API
