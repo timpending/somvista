@@ -2,146 +2,131 @@
 <html>
   <head>
   	<meta name="viewport" content="width=device-width,initial-scale=1">
-
-  	<title>See your Sounds</title>
+  	<title>Audio Recorder</title>
 
     <!-- Material Design Lite -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.teal-indigo.min.css" />
     <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
 
+    <!-- Dialog Polyfill -->
+    <script src="js/dialog-polyfill.js"></script>
+    <link rel="stylesheet" type="text/css" href="dialog-polyfill.css" />
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="index.css" media="screen" title="no title">
-
-
   </head>
+
   <body>
-    	<a href='record.html'> Click here to record a sound clip</a>
-      <hr>
-      <a href='record-d3.html'>TESTER ZONER</a>
-    <div id='output'></div>
 
+    <!-- Auth Overlay for Login -->
+    <div class='login-cover'></div>
 
-    <!-- Script Start -->
-    <!-- Firebase Init -->
-    <script src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
-    <script>
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyDZ3cMZ2bemqLARKEGMiIZGLI-3deGhOEo",
-        authDomain: "sound-2-sight.firebaseapp.com",
-        databaseURL: "https://sound-2-sight.firebaseio.com",
-        storageBucket: "sound-2-sight.appspot.com",
-        messagingSenderId: "526816102819"
-      };
-      firebase.initializeApp(config);
-    </script>
-  <!-- End Firebase Init -->
+    <!-- Login Dialog -->
+    <dialog id="loginDialog" class="mdl-dialog">
+      <h4 class="mdl-dialog__title">Sign In</h4>
+      <p id="loginError" class="mdl-color-text--red"></p>
+      <div class="mdl-dialog__content">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input class="mdl-textfield__input" type="text" id="loginEmail">
+          <label class="mdl-textfield__label" for="loginEmail">Email</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input class="mdl-textfield__input" type="text" id="loginPassword">
+          <label class="mdl-textfield__label" for="loginPassword">Password</label>
+        </div>
+      </div>
 
-    <script src='js/jquery-3.1.0.js'></script>
-    <script src='js/auth.js'></script>
-    <script src='js/db.js'></script>
-    <script src="js/d3.js"></script>
-    <script src="js/jscolor.min.js"></script>
+      <div class="mdl-dialog__actions">
+        <button id="registerButton" type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Register</button>
+        <button id="loginButton" type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Sign In</button>
+        <div id="loginLoader" class="login-loader mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+      </div>
+    </dialog>
+  <!-- End Login Dialog -->
 
-    <!-- D3 Testing Zone -->
-    <script type='text/javascript'>
-    // Variables
-    var svgW = 800;
-    var svgH = 500;
-    var padding = 75;
+<!-- NAV START -->
 
-    var dataset = [];
-    var numDataPoints = 50;
-    var xRange = Math.random() * 1000;
-    var yRange = Math.random() * 1000;
-    for (var i = 0; i < numDataPoints; i++) {
-        var newNumber1 = Math.round(Math.random() * xRange);
-        var newNumber2 = Math.round(Math.random() * yRange);
-        dataset.push([newNumber1, newNumber2]);
-    }
+<!-- Start Full Nav -->
+<div class="demo-layout-transparent mdl-layout mdl-layout--fixed-header">
+  <div id="viz">
+    <canvas id="analyser"></canvas>
+  </div>
+  <header class="mdl-layout__header">
+    <div class="head-row mdl-layout__header-row">
+      <!-- Add spacer, to align navigation to the right -->
+      <!-- Title -->
+      <span class="mdl-layout-title right-align">SomVista</span>
+      <!-- Navigation -->
+        <div class='right-align'>
+          <button id="record" class="header-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="toggleRecording(this);">Record<i class="button-right-icon material-icons">mic</i></button>
+          <button id='signOutButton' class="header-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Sign Out <i class="sign-out-icon button-right-icon material-icons">account_circle</i></button>
+        </div>
+    </div>
+  </header>
+  <!-- End Full Nav-->
 
-    // var dataset = [];                        //Initialize empty array
-    //   for (var i = 0; i < 25; i++) {           //Loop 25 times
-    //       var newNumber = Math.round(Math.random() * 30);  //New random number (0-30)
-    //       dataset.push(newNumber);
-    //       console.log(dataset);             //Add new number to array
-    //   }
-    var xScale = d3.scaleLinear()
-								 .domain([0, d3.max(dataset, function(d) { return d[0]; })])
-								 .range([padding, svgW-padding]);
+  <!-- Start MAIN -->
+  <main class="mdl-layout__content mdl-grid">
+  	<div id="controls">
+      <select id="encodingSelect" onchange="encoding = this.value;">
+  			<option value="mp3" selected>MP3</option>
+  			<option value="wav">WAV</option>
+		  </select>
+      <!-- <img id="record" src="img/mic128.png" onclick="toggleRecording(this);"> -->
+  		<!-- <a id="save" href="#"><img src="img/save.svg"></a> -->
+  	</div>
+    <div id="main">
+      <div id="output" style="width: 1024px; height: 500px;"></div>
 
-    var yScale = d3.scaleLinear()
-      .domain([0, d3.max(dataset, function(d) {return d[1]; } )])
-      .range([svgH-padding,padding]);
+      <!-- Output Settings & CRUD -->
+      <h6 id="recordingName"></h6>
+      <button id="recordingNameEditButton" onclick='updateRecName()'>Edit Rec. Name<i class="button-right-icon material-icons">mode_edit</i></button>
+      <button id="deleteRecording" onclick="deleteRec()">Delete Rec.<i class="button-right-icon material-icons">delete_forever</i></button>
+      <button id="saveRecording" onclick="saveRecObj(); saveRec()">Save Rec.<i class="button-right-icon material-icons">save</i></button>
+      <button id='loadRecording' onclick='listRec()'>Load Past Rec.<i class="button-right-icon material-icons">cloud_download</i></button>
+      <ul id="recordingList"></ul>
 
-    var rScale = d3.scaleLinear()
-      .domain([0, d3.max(dataset, function(d) {return d[1]; })])
-      .range([5, 15]);
+  	</div>
 
-    var xAxis = d3.axisBottom()
-      .scale(xScale)
+    <div id="waveSettings">
+      <form onsubmit="event.preventDefault(); updateBGColor();">
+        <input name="color2" type="hidden" id="canvasColorSelector">
+        <button type='submit' class="jscolor {valueElement: 'canvasColorSelector'}" id='canvasColorSelector'>Change the Background Color</button>
+        <input type='submit' />
+      </form>
+    </div>
+    <hr>
+    <button id='showUserButton' onclick='resetRecordings()' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">RESET</button>
+    <button id='showUserButton' onclick='showUser()' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Show User<i class="sign-out-icon button-right-icon material-icons">account_circle</i></button>
+    <a><button id='downloadIMG' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Download<i class="sign-out-icon button-right-icon material-icons">wallpaper</i></button></a>
+  </main>
+</div>
 
-    var yAxis = d3.axisLeft()
-      .scale(yScale)
+    <!-- Scripts Start -->
 
-    var svg = d3.select("#output")
-      .append("svg")
-      .attr('width', svgW)
-      .attr('height', svgH);
-
-    svg.append("g")
-      .attr("class", "axis")
-      .attr("transform", "translate(-10," + (svgH - padding) + ")")
-      .call(xAxis)
-
-    svg.append("g")
-      .attr("class", "axis")
-      .attr("transform", "translate("+(padding-10)+", 0)")
-      .call(yAxis)
-
-    svg.selectAll("circle")
-      .data(dataset)
-      .enter()
-      .append("circle")
-      .attr("cx", function(d) {return xScale(d[0]) })
-      .attr("cy", function(d) {return yScale(d[1]) })
-      .attr("r", function(d) {return rScale(d[1]) });
-
-    // svg.selectAll("text")
-    //   .data(dataset)
-    //   .enter()
-    //   .append("text")
-    //   .text(function(d) {
-    //     return d[0] + ", " + d[1]
-    //     })
-    //   .attr("fill", "red")
-    //   .attr("x", function(d) {return xScale(d[0]) })
-    //   .attr("y", function(d) {return yScale(d[1]) });
-
-
-    // svg.selectAll("rect")
-		// 	   .data(dataset)
-		// 	   .enter()
-		// 	   .append("rect")
-		// 	   .attr("x", function(d, i) {
-		// 	   		return i * (w / dataset.length);
-		// 	   })
-		// 	   .attr("y", function(d) {
-		// 	   		return h - (d * 4);
-		// 	   })
-		// 	   .attr("width", w / dataset.length - barPadding)
-		// 	   .attr("height", function(d) {
-		// 	   		return d * 4;
-		// 	   })
-		// 	   .attr("fill", function(d) {
-		// 			return "rgb(0, 0, " + (d * 10) + ")";
-		// 	   });
-
-
-
-
-
-    </script>
+        <!-- Firebase Init -->
+        <script src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
+        <script>
+          // Initialize Firebase
+          var config = {
+            apiKey: "AIzaSyDZ3cMZ2bemqLARKEGMiIZGLI-3deGhOEo",
+            authDomain: "sound-2-sight.firebaseapp.com",
+            databaseURL: "https://sound-2-sight.firebaseio.com",
+            storageBucket: "sound-2-sight.appspot.com",
+            messagingSenderId: "526816102819"
+          };
+          firebase.initializeApp(config);
+        </script>
+      <!-- End Firebase Init -->
+        <script src='js/jquery-3.1.0.min.js'></script>
+        <script src='js/auth.js'></script>
+        <script src='js/db.js'></script>
+        <script src='js/edit-rec.js'></script>
+        <script src="js/d3.min.js"></script>
+        <script src="js/jscolor.min.js"></script>
+        <script src="js/audiodisplay-d3.js"></script>
+      	<script src="js/recorderjs/recorder.js"></script>
+      	<script src="js/main.js"></script>
   </body>
 </html>
