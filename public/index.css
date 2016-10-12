@@ -1,5 +1,5 @@
 /* Resetting Fonts Minus Custom Ones */
-* {
+*, .mdl-button {
   font-family: 'Raleway', 'Roboto', sans-serif;
 }
 /* Login & Auth */
@@ -59,7 +59,7 @@
   margin: 0;
   list-style: none;
 }
-.header-button {
+.button-gap {
   margin-right: 2vh
 }
 
@@ -81,10 +81,10 @@
   font-weight: 600;
   font-size: 48px;
   text-shadow:
-    -1px -1px 4px #fff,
-    1px -1px 4px #fff,
-    -1px 1px 4px #fff,
-     1px 1px 4px #fff;
+    -1px -1px 4px #F1F1F1,
+    1px -1px 4px #F1F1F1,
+    -1px 1px 4px #F1F1F1,
+     1px 1px 4px #F1F1F1;
 }
 
 header {
@@ -115,6 +115,10 @@ body {
   height: 100vh;
   width: 100%;
   margin: 0 0;
+}
+
+.vert {
+    vertical-align: middle;
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -191,6 +195,16 @@ canvas {
   justify-content: space-around;
   height: 20%;
   width: 100%;
+}
+
+#recordingName {
+  font-family: 'Megrim', 'Raleway', cursive;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.bg-change-button {
+  background: rgb(255,87,34);
 }
 
 #record.recording {
