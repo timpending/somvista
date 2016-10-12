@@ -26,9 +26,6 @@
 /* End Login & Auth */
 
 /* Header & Navigation */
-.sign-out-icon {
-  margin: 0 10px;
-}
 .demo-layout-transparent .mdl-layout__header,
 .demo-layout-transparent .mdl-layout__drawer-button, .mdl-layout__header-row {
   padding: 0;
@@ -59,16 +56,65 @@
   left: 0;
   z-index: 1;
   width: 100%;
-  height: 15vh;
+  height: 10vh;
+}
+
+.title{
+  width: 85%;
+  margin: 0 auto;
+  text-align: right;
 }
 
 header {
-  height:15vh
+  height:10vh
+}
+
+.mdl-button--fab {
+    height: 48px;
+    width: 48px;
+    min-width: 48px;
 }
 /* End Navigation */
 
 
 /* Page Wide Settings */
+body {
+  font: 14pt Arial, sans-serif;
+  background: #f1f1f1;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  height: 100vh;
+  width: 100%;
+  margin: 0 0;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  margin: 0;
+  display: inline-block;
+}
+
+form {
+  display: inline-block;
+}
+
+.mdl-grid {
+    max-width: 1152px;
+    display: flex;
+    justify-content: center;
+}
+
+.center {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.right{
+  display: inline-block;
+  float:right;
+}
+
+
 .flex-container {
   padding: 0;
   margin: 0;
@@ -88,29 +134,14 @@ header {
   justify-content: space-around;
 }
 
-body {
-  font: 14pt Arial, sans-serif;
-  background: #f1f1f1;
-  display: flex;
-  flex-direction: column;
-  overflow: scroll;
-  height: 100vh;
-  width: 100%;
-  margin: 0 0;
-}
-
-.mdl-grid {
-    max-width: 1024px;
-}
-
-/*Future & Custom Settings */
-#encodingSelect {
-  display: none;
-}
-
 canvas {
   display: block;
   box-shadow: 0px 0px 10px grey;
+}
+
+#outputRealm {
+  margin: 0 auto;
+  display: inline-block;
 }
 
 #output {
@@ -118,6 +149,11 @@ canvas {
   display: inline-block;
   margin-top: 15px;
   box-shadow: 0px 0px 10px grey;
+}
+
+#settings {
+  display: inline-block;
+  margin-top: 15px;
 }
 
 #controls {
@@ -132,24 +168,9 @@ canvas {
 #record.recording {
   background: rgba(255, 0, 0, 0.87);
 }
+/* End page wide settings */
 
-/*#save, #save img { height: 10vh; }
-#save { opacity: 0.25;}
-#save[download] { opacity: 1;}
-#viz {
-  height: 80%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-}*/
-
-#main {
-  display: block;
+/* Hidden Specific Settings */
+#encodingSelect {
+  display: none;
 }
-/*@media (orientation: landscape) {
-  body { flex-direction: row;}
-  #controls { flex-direction: column; height: 100%; width: 10%;}
-  #viz { height: 100%; width: 90%;}
-}*/

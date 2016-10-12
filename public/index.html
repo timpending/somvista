@@ -56,13 +56,13 @@
     <div class="head-row mdl-layout__header-row">
       <!-- Add spacer, to align navigation to the right -->
       <!-- Title -->
-      <span class="mdl-layout-title right-align">SomVista</span>
+      <span class="mdl-layout-title title">SomVista</span>
+      <!-- <div class="mdl-layout-spacer"></div> -->
       <!-- Navigation -->
-        <div class='right-align'>
-          <button id="record" class="header-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="toggleRecording(this);">Record<i class="button-right-icon material-icons">mic</i></button>
-          <button id='signOutButton' class="header-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Sign Out <i class="sign-out-icon button-right-icon material-icons">account_circle</i></button>
+        <div class='right'>
+          <button id="record" class="header-button mdl-button mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="toggleRecording(this);"><i class="button-right-icon material-icons">mic</i></button>
+          <button id='signOutButton' class="header-button mdl-button mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect mdl-button--accent"><i class="material-icons">exit_to_app</i></button>
         </div>
-    </div>
   </header>
   <!-- End Full Nav-->
 
@@ -73,35 +73,38 @@
   			<option value="mp3" selected>MP3</option>
   			<option value="wav">WAV</option>
 		  </select>
-      <!-- <img id="record" src="img/mic128.png" onclick="toggleRecording(this);"> -->
-  		<!-- <a id="save" href="#"><img src="img/save.svg"></a> -->
   	</div>
-    <div id="main">
+
+    <div id="outputRealm" class='center mdl-cell mdl-cell--12-col'>
+      <h6 id="recordingName" class='mdl-cell mdl-cell--12-col'></h6>
       <div id="output" style="width: 1024px; height: 500px;"></div>
-
-      <!-- Output Settings & CRUD -->
-      <h6 id="recordingName"></h6>
-      <button id="recordingNameEditButton" onclick='updateRecName()'>Edit Rec. Name<i class="button-right-icon material-icons">mode_edit</i></button>
-      <button id="deleteRecording" onclick="deleteRec()">Delete Rec.<i class="button-right-icon material-icons">delete_forever</i></button>
-      <button id="saveRecording" onclick="saveRecObj(); saveRec()">Save Rec.<i class="button-right-icon material-icons">save</i></button>
-      <button id='loadRecording' onclick='listRec()'>Load Past Rec.<i class="button-right-icon material-icons">cloud_download</i></button>
-      <ul id="recordingList"></ul>
-
-  	</div>
-
-    <div id="waveSettings">
-      <form onsubmit="event.preventDefault(); updateBGColor();">
-        <input name="color2" type="hidden" id="canvasColorSelector">
-        <button type='submit' class="jscolor {valueElement: 'canvasColorSelector'}" id='canvasColorSelector'>Change the Background Color</button>
-        <input type='submit' />
-      </form>
     </div>
-    <hr>
+
+    <div id="main">
+      <div id='settings' class='mdl-cell mdl-cell--12-col'>
+        <!-- Output Settings & CRUD -->
+        <a><button id='downloadIMG' class="right mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">D/L<i class="button-right-icon material-icons">cloud_download</i></button></a>
+        <button id="deleteRecording" onclick="deleteRec()" class="right header-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Delete<i class="button-right-icon material-icons">delete_forever</i></button>
+        <button id="saveRecording" class="right header-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="saveRecObj(); saveRec()">Save<i class="button-right-icon material-icons">save</i></button>
+        <button id='loadRecording' class="right header-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick='listRec()'>Load<i class="button-right-icon material-icons">wallpaper</i></button>
+
+        <form onsubmit="event.preventDefault(); updateBGColor();">
+          <input class="right header-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type='submit' value='BG Submit'/>
+          <input name="color2" class='right' type="hidden" id="canvasColorSelector">
+          <button class="jscolor {valueElement: 'canvasColorSelector'} right header-button mdl-button mdl-button--raised mdl-button--accent" id='canvasColorSelector'>Change the Background Color</button>
+        </form>
+        <button id="recordingNameEditButton" onclick='updateRecName()' class="right header-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Edit Name<i class="button-right-icon material-icons">mode_edit</i></button>
+
+        <ul id="recordingList"></ul>
+      </div>
+
+    <!-- End Main -->
+  	</div>
+    <!-- <hr>
     <button id='showUserButton' onclick='resetRecordings()' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">RESET</button>
-    <button id='showUserButton' onclick='showUser()' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Show User<i class="sign-out-icon button-right-icon material-icons">account_circle</i></button>
-    <a><button id='downloadIMG' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Download<i class="sign-out-icon button-right-icon material-icons">wallpaper</i></button></a>
+    <button id='showUserButton' onclick='showUser()' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Show User<i class="button-right-icon material-icons">account_circle</i></button>
   </main>
-</div>
+</div> -->
 
     <!-- Scripts Start -->
 
