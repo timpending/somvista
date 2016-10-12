@@ -1,5 +1,5 @@
 # SomVista
-A deployed version of the web app can be found [here](www.SomVista.com).  
+A deployed version of the web app can be found [here](http://www.SomVista.com).  
 
 # Documentation links:
   - MDN Web Audio API: https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API
