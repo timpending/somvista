@@ -32,7 +32,6 @@ function saveRecArray(){
 
 function saveRecObj(){
   var newName = prompt('Please enter a name to save in your database.  Note that duplicate files names will be overwritten with the most recent entry.', recObj.name)
-  newName = recObj.name
   bg = recObj.bgColor
   // If not cancelled
   if (newName != null) {
@@ -47,7 +46,6 @@ function saveRecObj(){
       bgColor: bg
     })
     // TODO Save Recording Separately.  Only Call when saving, re-loading the item
-    console.log(bg);
     console.log('Saved obj in DB!');
     saveRecArray();
   }
