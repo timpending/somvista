@@ -86,12 +86,13 @@
 
     <div id="main">
       <div id='settings' class='mdl-cell mdl-cell--12-col'>
+        <ul id="recordingList"></ul>
         <!-- Output Settings & CRUD -->
         <a><button id='downloadIMG' class="right mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"><i class="button-left-icon material-icons">cloud_download</i> DL</button></a>
 
         <button id="deleteRecording" onclick="deleteRec()" class="right button-gap mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"><i class="button-left-icon material-icons">delete_forever</i> Delete</button>
 
-        <button id="saveRecording" class="right button-gap mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="saveRecObj(); saveRec()"><i class="button-left-icon material-icons">save</i> Save</button>
+        <button id="saveRecording" class="right button-gap mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="saveRecObj()"><i class="button-left-icon material-icons">save</i> Save</button>
 
         <button id='loadRecording' class="right button-gap mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick='listRec()'><i class="button-left-icon material-icons">wallpaper</i> Load</button>
 
@@ -102,7 +103,7 @@
         </form>
         <button id="recordingNameEditButton" onclick='updateRecName()' class="right button-gap mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"><i class="button-left-icon material-icons">mode_edit</i> Edit Name</button>
 
-        <ul id="recordingList"></ul>
+
       </div>
 
     <!-- End Main -->

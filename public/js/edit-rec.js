@@ -1,4 +1,5 @@
 function updateBGColor() {
+  $('#recordingList').empty();
   document.getElementById('output').innerHTML = '';
   recObj.bgColor = '#' + document.getElementById('canvasColorSelector').value
 
@@ -14,6 +15,7 @@ function updateBGColor() {
 }
 
 function updateRecName() {
+  $('#recordingList').empty();
   if (recObj.length !== null){
 
   //TODO: Swap these prompts into Dialog
@@ -22,12 +24,14 @@ function updateRecName() {
     recObj.name = 'Your SomVista'
   }
   document.getElementById('recordingName').innerHTML = recObj.name
+  
   } else {
-    alert('You need to record first!')
+    alert('You need to record or select a past recording first!')
   }
 }
 
 function deleteRec() {
+  $('#recordingList').empty();
   if (recObj.length !== null){
     var ask = confirm('Are you sure you want to delete your SomVista-piece?')
     if (ask == true){
