@@ -6,12 +6,15 @@
 
     <!-- Material Design Lite -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.teal-indigo.min.css" />
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.deep_orange-indigo.min.css" />
     <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
 
     <!-- Dialog Polyfill -->
     <script src="js/dialog-polyfill.js"></script>
     <link rel="stylesheet" type="text/css" href="dialog-polyfill.css" />
+
+    <!-- Google Font Families -->
+    <link href="https://fonts.googleapis.com/css?family=Megrim|Raleway" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="index.css" media="screen" title="no title">
@@ -24,7 +27,8 @@
 
     <!-- Login Dialog -->
     <dialog id="loginDialog" class="mdl-dialog">
-      <h4 class="mdl-dialog__title">Sign In</h4>
+      <h1 class="login-title center">somVista</h1>
+      <h6 class="login-subheader center">Sign In</h6>
       <p id="loginError" class="mdl-color-text--red"></p>
       <div class="mdl-dialog__content">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -56,12 +60,12 @@
     <div class="head-row mdl-layout__header-row">
       <!-- Add spacer, to align navigation to the right -->
       <!-- Title -->
-      <span class="mdl-layout-title title">SomVista</span>
+      <h4 class="mdl-layout-title title">somVista</h4>
       <!-- <div class="mdl-layout-spacer"></div> -->
       <!-- Navigation -->
         <div class='right'>
           <button id="record" class="header-button mdl-button mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="toggleRecording(this);"><i class="button-right-icon material-icons">mic</i></button>
-          <button id='signOutButton' class="header-button mdl-button mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect mdl-button--accent"><i class="material-icons">exit_to_app</i></button>
+          <button id='signOutButton' class="header-button mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect"><i class="material-icons">exit_to_app</i></button>
         </div>
   </header>
   <!-- End Full Nav-->
@@ -89,9 +93,9 @@
         <button id='loadRecording' class="right header-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick='listRec()'>Load<i class="button-right-icon material-icons">wallpaper</i></button>
 
         <form onsubmit="event.preventDefault(); updateBGColor();">
-          <input class="right header-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type='submit' value='BG Submit'/>
+          <input class="right header-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type='submit' value='Change BG Color'/>
           <input name="color2" class='right' type="hidden" id="canvasColorSelector">
-          <button class="jscolor {valueElement: 'canvasColorSelector'} right header-button mdl-button mdl-button--raised mdl-button--accent" id='canvasColorSelector'>Change the Background Color</button>
+          <button class="jscolor {valueElement: 'canvasColorSelector'} right header-button mdl-button mdl-button--raised mdl-button--accent" id='canvasColorSelector'>Select New Background Color</button>
         </form>
         <button id="recordingNameEditButton" onclick='updateRecName()' class="right header-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Edit Name<i class="button-right-icon material-icons">mode_edit</i></button>
 

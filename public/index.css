@@ -1,4 +1,18 @@
+/* Resetting Fonts Minus Custom Ones */
+* {
+  font-family: 'Raleway', 'Roboto', sans-serif;
+}
 /* Login & Auth */
+.login-title {
+  font-family: 'Megrim', 'Raleway', cursive;
+  width: 100%;
+}
+
+.login-subheader {
+  font-family: 'Raleway', 'Roboto', sans-serif;
+  width: 100%;
+}
+
 .login-cover {
   position: fixed;
   z-index: 500;
@@ -63,6 +77,14 @@
   width: 85%;
   margin: 0 auto;
   text-align: right;
+  font-family: 'Megrim', 'Raleway', cursive;
+  font-weight: 600;
+  font-size: 48px;
+  text-shadow:
+    -1px -1px 4px #fff,
+    1px -1px 4px #fff,
+    -1px 1px 4px #fff,
+     1px 1px 4px #fff;
 }
 
 header {
@@ -74,11 +96,17 @@ header {
     width: 48px;
     min-width: 48px;
 }
+#signOutButton {
+  background: rgb(255,87,34);
+}
 /* End Navigation */
 
+/*font-family: 'Megrim', cursive;*/
+/*font-family: 'Raleway', sans-serif;*/
 
 /* Page Wide Settings */
 body {
+  font-family: 'Raleway', 'Roboto', sans-serif;
   font: 14pt Arial, sans-serif;
   background: #f1f1f1;
   display: flex;
