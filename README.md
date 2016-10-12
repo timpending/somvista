@@ -10,6 +10,12 @@ A deployed version of the web app can be found [here](http://www.SomVista.com).
  - W3C Canvas Specs: https://www.w3.org/TR/2dcontext/
 
 #TODO
+- Base Color Adjuster
+- Style Past Saved Items
+- Help Section
+- Profile Section
+- Output placeholder upon Initial login
+~~
 - Wireframes
 - User Stories
 - Logo Design
