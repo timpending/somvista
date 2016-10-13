@@ -15,18 +15,24 @@ function updateBGColor() {
 }
 
 function updateRecName() {
-  $('#recordingList').empty();
-  if (recObj.length !== null){
+  var promptAns = prompt('Enter a name for your file')
+  if (prompt !== null) {
 
-  //TODO: Swap these prompts into Dialog
-  recObj.name = prompt('Enter a name for your file')
-  if (recObj.name === ''){
-    recObj.name = 'Your SomVista'
-  }
-  document.getElementById('recordingName').innerHTML = recObj.name
-  
-  } else {
-    alert('You need to record or select a past recording first!')
+    if (recObj.length !== null){
+      $('#recordingList').empty();
+    //TODO: Swap these prompts into Dialog
+      recObj.name = promptAns
+
+      if (recObj.name === ''){
+        recObj.name = 'Your SomVista'
+        document.getElementById('recordingName').innerHTML = recObj.name
+      } else {
+          document.getElementById('recordingName').innerHTML = recObj.name
+      }
+
+    } else {
+      alert('You need to record or select a past recording first!')
+    }
   }
 }
 
@@ -45,5 +51,5 @@ function deleteRec() {
       document.getElementById('output').innerHTML = '';
     }
   }
-
+  $("#outputPlaceholder").show();
 }

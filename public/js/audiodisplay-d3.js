@@ -55,6 +55,7 @@ function d3Buffer (data) {
 
 
 function d3CanvasBuff(data){
+  $("#outputPlaceholder").hide();
   var width = 1024;
   var height = 500;
   var padding = 15;
