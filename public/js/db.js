@@ -53,6 +53,10 @@ function saveRecObj(){
 
 
 function listRec() {
+  // firebaseDB.ref('users/'+firebase.auth().currentUser.uid +'/recordings/Tame Impala').remove()
+  // firebaseDB.ref('users/'+firebase.auth().currentUser.uid +'/recObj/Tame Impala').remove()
+  // firebaseDB.ref('users/'+firebase.auth().currentUser.uid +'/recordings/Quiet').remove()
+  // firebaseDB.ref('users/'+firebase.auth().currentUser.uid +'/recObj/Quiet').remove()
 
   firebaseDB.ref('users/'+firebase.auth().currentUser.uid + '/recObj').once('value', function(snapshot){
     $('#recordingList').empty();
@@ -73,6 +77,7 @@ function listRec() {
 }
 
 function showSavedRec(el) {
+
   var savedRecName = el.id
   var recordingName = document.getElementById("recordingName")
 
